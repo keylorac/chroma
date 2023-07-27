@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<chroma>
+<annotation>
+Hadron spectrum input
+</annotation>
+<Param> 
+  <InlineMeasurements>
+​
+  <elem>
+   <Name>QIO_READ_NAMED_OBJECT</Name>
+    
+     <NamedObject>
+      <object_id>prop_src1_x0y0z0t1</object_id>
+      <object_type>LatticePropagator</object_type>
+     </NamedObject>
+    <File>
+     <file_name>/gpfs/alpine/scratch/mcamacho/stf006/summit_test_runs/run_tests/props/prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2200_mom_nx4ny4nz0nt0.lime</file_name>
+     <file_volfmt>SINGLEFILE</file_volfmt>
+     <parallel_io>true</parallel_io>
+    </File>
+  </elem>
+​
+  <elem>
+   <Name>QIO_READ_NAMED_OBJECT</Name>
+     <Frequency>1</Frequency>
+     <NamedObject>
+      <object_id>prop_src2_x1y1z1t2</object_id>
+      <object_type>LatticePropagator</object_type>
+     </NamedObject>
+    <File>
+     <file_name>/gpfs/alpine/scratch/mcamacho/stf006/summit_test_runs/run_tests/props/prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2200_mom_nx0ny4nz4nt0.lime</file_name>
+     <file_volfmt>SINGLEFILE</file_volfmt>
+     <parallel_io>true</parallel_io>
+    </File>
+  </elem>
+​
+
+<!-- Agregamos la medición de una suma de 2 propagadores multiplicados por 
+una constante que nos dan un propagador resultante -->
+
+    <elem>
+      <Name>SUM_PROPS</Name>
+      <Param>
+         <version>1</version>
+         <current>V4</current>
+         <cons_1>0.707</cons_1> <!-- Constante 1 -->
+         <cons_2>0.707</cons_2> <!-- Constante 2 -->
+         <file_name>myout.out.xml</file_name>
+      </Param>
+      <NamedObject>
+        <gauge_id>default_gauge_field</gauge_id>
+        <source_id>sh_source_1</source_id>
+        <prop_1>prop_src1_x0y0z0t1</prop_1> <!-- Propagador 1 -->
+        <prop_2>prop_src2_x1y1z1t2</prop_2> <!-- Propagador 2 -->
+	<prop_r>prop_src3_x0y0z0t1_x1y1z1t2</prop_r> <!-- Propagador resultante -->
+      </NamedObject>
+    </elem>
+​
+  </InlineMeasurements>
+   <nrow>16 16 16 48</nrow>
+</Param>
+​
+<RNG>
+  <Seed>	
+    <elem>11</elem>
+    <elem>11</elem>
+    <elem>11</elem>
+    <elem>0</elem>
+  </Seed>
+</RNG>
+​
+<Cfg>
+ <cfg_type>WEAK_FIELD</cfg_type>
+ <cfg_file>dummy</cfg_file>
+</Cfg>
+</chroma>
