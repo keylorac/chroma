@@ -15,7 +15,7 @@
 namespace Chroma 
 { 
   /*! \ingroup inlinehadron */
-  namespace InlineSUM_PROPSEnv 
+  namespace InlineSum_PropsEnv 
   {
     extern const std::string name;
     bool registerAll();
@@ -24,13 +24,13 @@ namespace Chroma
 
   //! Parameter structure
   /*! \ingroup inlinehadron */
-  struct InlineSum_propsParams 
+  struct InlineSum_PropsParams 
   {
-    InlineSum_propsParams();
-    InlineSum_propsParams(XMLReader& xml_in, const std::string& path);
+    InlineSum_PropsParams();
+    InlineSum_PropsParams(XMLReader& xml_in, const std::string& path);
     void write(XMLWriter& xml_out, const std::string& path);
 
-   
+    unsigned long frequency;   
 
     //! Parameters
     struct Param_t
@@ -38,7 +38,7 @@ namespace Chroma
       
       float cons_1;          /*!< constante 2 */
       float cons_2;          /*!< constante 1 */ 
-                     
+      GroupXML_t   cfs;                /*!< Fermion state */                     
     } param;
 
     //! Propagators
@@ -60,8 +60,10 @@ namespace Chroma
   {
   public:
     ~InlineSum_props() {}
-    InlineSum_props(const InlineSum_propsParams& p) : params(p) {}
+    InlineSum_props(const InlineSum_PropsParams& p) : params(p) {}
     InlineSum_props(const InlineSum_props& p) : params(p.params) {}
+
+    unsigned long getFrequency(void) const {return params.frequency;}
 
     
 
@@ -75,7 +77,7 @@ namespace Chroma
 	      XMLWriter& xml_out); 
 
   private:
-    InlineSum_propsParams params;
+    InlineSum_PropsParams params;
   };
 
 }

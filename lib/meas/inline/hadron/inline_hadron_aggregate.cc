@@ -163,7 +163,7 @@ namespace Chroma
 //      success &= InlineMultipoleEnv::registerAll();  // not being used
 	success &= InlineNprVertexEnv::registerAll();
 	success &= InlineNprEnv::registerAll();
-    success &= InlineSUM_PROPSEnv::registerAll();
+    success &= InlineSum_PropsEnv::registerAll();
 	success &= InlineDistillutionNoiseEnv::registerAll();
 	success &= InlinePropDistillutionEnv::registerAll();
 	success &= InlinePropDistillationEnv::registerAll();

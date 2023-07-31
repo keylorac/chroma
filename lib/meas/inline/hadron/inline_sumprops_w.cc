@@ -17,14 +17,14 @@
 #include "actions/ferm/fermstates/ferm_createstate_aggregate_w.h"
 namespace Chroma 
 { 
-  namespace InlineSUM_PROPSEnv 
+  namespace InlineSum_PropsEnv 
   { 
     namespace
     {
       AbsInlineMeasurement* createMeasurement(XMLReader& xml_in, 
 					      const std::string& path) 
       {
-	return new InlineSUM_PROPS(InlineSUM_PROPSParams(xml_in, path));
+	return new InlineSum_props(InlineSum_PropsParams(xml_in, path));
       }
       //! Local registration flag
       bool registered = false;
@@ -43,55 +43,59 @@ namespace Chroma
       return success;
     }
   }
-}
+
  
   //! Param input
-  void read(XMLReader& xml, const std::string& path, InlineSUM_PROPSParams::Param_t& input)
+  void read(XMLReader& xml, const std::string& path, InlineSum_PropsParams::Param_t& input)
   {
     XMLReader paramtop(xml, path);
     int version;
     read(paramtop, "version", version);
+    
     if (paramtop.count("FermState") != 0)
       input.cfs = readXMLGroup(paramtop, "FermState", "Name");
     else
       input.cfs = CreateFermStateEnv::nullXMLGroup();
+    
     switch (version) 
     {
     case 1:
       break;
     default :
-      QDPIO::cerr << InlineSUM_PROPSEnv::name << ": input parameter version " 
+      QDPIO::cerr << InlineSum_PropsEnv::name << ": input parameter version " 
 		  << version << " unsupported." << std::endl;
       QDP_abort(1);
     }
     
+      read(paramtop, "cons_1", input.cons_1);
+      read(paramtop, "cons_2", input.cons_2);
     //read(paramtop, "links_max", input.links_max);
-    read(paramtop, "file_name", input.file_name);
-    read(paramtop,"cfg",input.cfg);
+    //read(paramtop, "file_name", input.file_name);
+   // read(paramtop,"cfg",input.cfg);
   }
   //! Param write
-  void write(XMLWriter& xml, const std::string& path, const InlineSUM_PROPSParams::Param_t& input)
+  void write(XMLWriter& xml, const std::string& path, const InlineSum_PropsParams::Param_t& input)
   {
     push(xml, path);
     int version = 1;
     write(xml, "version", version);
     //write(xml, "links_max", input.links_max);
-    write(xml, "file_name", input.file_name);
-    write(xml, "cfg", input.cfg);    
+    write(xml, "cons_1", input.cons_1);
+    write(xml, "cons_1", input.cons_2);    
     xml << input.cfs.xml;
     pop(xml);
   }
   //! Propagator input
-  void read(XMLReader& xml, const std::string& path, InlineSUM_PROPSParams::NamedObject_t& input)
+  void read(XMLReader& xml, const std::string& path, InlineSum_PropsParams::NamedObject_t& input)
   {
     XMLReader inputtop(xml, path);
     read(inputtop, "gauge_id", input.gauge_id);
     read(inputtop, "prop_1", input.prop_1); //Agregamos el id del propagador 1
     read(inputtop, "prop_2", input.prop_2); //Agregamos el id del propagador 2
-    read(inputtop, "prop_r", input.prop_3); //Agregamos el id del propagador resultante
+    read(inputtop, "prop_r", input.prop_r); //Agregamos el id del propagador resultante
   }
   //! Propagator output
-  void write(XMLWriter& xml, const std::string& path, const InlineSUM_PROPSParams::NamedObject_t& input)
+  void write(XMLWriter& xml, const std::string& path, const InlineSum_PropsParams::NamedObject_t& input)
   {
     push(xml, path);
     write(xml, "gauge_id", input.gauge_id);
@@ -101,8 +105,8 @@ namespace Chroma
     pop(xml);
   }
   // Param stuff
-  InlineSUM_PROPSParams::InlineSUM_PROPSParams() {frequency = 0;}
-  InlineSUM_PROPSParams::InlineSUM_PROPSParams(XMLReader& xml_in, const std::string& path) 
+  InlineSum_PropsParams::InlineSum_PropsParams() {frequency = 0;}
+  InlineSum_PropsParams::InlineSum_PropsParams(XMLReader& xml_in, const std::string& path) 
   {
     try 
     {
@@ -128,7 +132,7 @@ namespace Chroma
     }
   }
   void
-  InlineSUM_PROPSParams::write(XMLWriter& xml_out, const std::string& path) 
+  InlineSum_PropsParams::write(XMLWriter& xml_out, const std::string& path) 
   {
     push(xml_out, path);
     
@@ -140,7 +144,7 @@ namespace Chroma
  
   // Function call
   void 
-  InlineSUM_PROPS::operator()(unsigned long update_no,
+  InlineSum_props::operator()(unsigned long update_no,
 				   XMLWriter& xml_out) 
   {
     // If xml file not empty, then use alternate
@@ -161,7 +165,7 @@ namespace Chroma
   }
   // Function call
   void 
-  InlineSUM_PROPS::func(unsigned long update_no,
+  InlineSum_props::func(unsigned long update_no,
 			     XMLWriter& XmlOut) 
   {
     START_CODE();
@@ -207,19 +211,19 @@ namespace Chroma
     }
     catch( std::bad_cast ) 
     {
-      QDPIO::cerr << InlineSUM_PROPSEnv::name << ": caught dynamic cast error" 
+      QDPIO::cerr << InlineSum_PropsEnv::name << ": caught dynamic cast error" 
 		  << std::endl;
       QDP_abort(1);
     }
     catch (const std::string& e) 
     {
-      QDPIO::cerr << InlineSUM_PROPSEnv::name << ": std::map call failed: " << e 
+      QDPIO::cerr << InlineSum_PropsEnv::name << ": std::map call failed: " << e 
 		  << std::endl;
       QDP_abort(1);
     }
     catch( ... )
     {
-      QDPIO::cerr << InlineSUM_PROPSEnv::name << ": caught generic exception "
+      QDPIO::cerr << InlineSum_PropsEnv::name << ": caught generic exception "
 		  << std::endl;
       QDP_abort(1);
     }
@@ -231,11 +235,18 @@ namespace Chroma
     //#################################################################################//
     // Read Forward Propagator                                                         //
     //#################################################################################//
+    SftMom phases_nomom1( 0, true, Nd-1 );  // used to check props. Fix to Nd-1 direction.
+
+
     LatticePropagator P1;
     ChromaProp_t prop_header;
     PropSourceConst_t source_header;
     QDPIO::cout << "Attempt to parse forward propagator" << std::endl;
     QDPIO::cout << "parsing forward propagator " << params.named_obj.prop_1 << " ... " << std::endl << std::flush;
+
+
+    SftMom phases_nomom2( 0, true, Nd-1 );  // used to check props. Fix to Nd-1 direction.
+
     LatticePropagator P2;
     ChromaProp_t prop_header_1;
     PropSourceConst_t source_header_1;
@@ -262,7 +273,7 @@ namespace Chroma
       // Use this for any possible verification
       {
 	multi1d<Double> PropCheck = 
-	  sumMulti( localNorm2( F ), phases_nomom.getSet() );
+	  sumMulti( localNorm2( P1 ), phases_nomom1.getSet() );
 	QDPIO::cout << "forward propagator check = " << PropCheck[0] << std::endl;
 	// Write out the forward propagator header
 	push(XmlOut, "ForwardProp");
@@ -274,13 +285,13 @@ namespace Chroma
     }
     catch( std::bad_cast ) 
     {
-      QDPIO::cerr << InlineSUM_PROPSEnv::name << ": caught dynamic cast error" 
+      QDPIO::cerr << InlineSum_PropsEnv::name << ": caught dynamic cast error" 
 		  << std::endl;
       QDP_abort(1);
     }
     catch (const std::string& e) 
     {
-      QDPIO::cerr << InlineSUM_PROPSEnv::name << ": forward prop: error message: " << e 
+      QDPIO::cerr << InlineSum_PropsEnv::name << ": forward prop: error message: " << e 
 		  << std::endl;
       QDP_abort(1);
     }
@@ -304,7 +315,7 @@ namespace Chroma
       // Use this for any possible verification
       {
 	multi1d<Double> PropCheck = 
-	  sumMulti( localNorm2( F ), phases_nomom.getSet() );
+	  sumMulti( localNorm2( P2 ), phases_nomom2.getSet() );
 	QDPIO::cout << "forward propagator check = " << PropCheck[0] << std::endl;
 	// Write out the forward propagator header
 	push(XmlOut, "ForwardProp");
@@ -316,13 +327,13 @@ namespace Chroma
     }
     catch( std::bad_cast ) 
     {
-      QDPIO::cerr << InlineSUM_PROPSEnv::name << ": caught dynamic cast error" 
+      QDPIO::cerr << InlineSum_PropsEnv::name << ": caught dynamic cast error" 
 		  << std::endl;
       QDP_abort(1);
     }
     catch (const std::string& e) 
     {
-      QDPIO::cerr << InlineSUM_PROPSEnv::name << ": forward prop: error message: " << e 
+      QDPIO::cerr << InlineSum_PropsEnv::name << ": forward prop: error message: " << e 
 		  << std::endl;
       QDP_abort(1);
     }
@@ -340,27 +351,27 @@ namespace Chroma
     write(file_xml, "Param", params.param);
     write(file_xml, "Config", gauge_xml);
     pop(file_xml);
-    QDPFileWriter qio_file(file_xml, params.param.file_name,QDPIO_SINGLEFILE, 
-			   QDPIO_SERIAL, QDPIO_OPEN); 
+    //QDPFileWriter qio_file(file_xml, params.param.file_name,QDPIO_SINGLEFILE, 
+	//		   QDPIO_SERIAL, QDPIO_OPEN); 
     XMLBufferWriter prop_xml;
     push(prop_xml,"QuarkPropagator");
-    write(prop_xml,"mom",mom);
-    write(prop_xml,"origin",t_src);
-    write(prop_xml,"t_dir",t_dir);
+    //write(prop_xml,"mom",mom);
+    //write(prop_xml,"origin",t_src);
+    //write(prop_xml,"t_dir",t_dir);
     pop(prop_xml) ;
    
      //end ale
-    close(qio_file);
+    //close(qio_file);
     QDPIO::cout << "finished calculating SUM_PROPS"
 		<< "  time= "
 		<< swatch.getTimeInSeconds() 
 		<< " secs" << std::endl;
     pop(XmlOut);   // SUM_PROPS
     snoop.stop();
-    QDPIO::cout << InlineSUM_PROPSEnv::name << ": total time = "
+    QDPIO::cout << InlineSum_PropsEnv::name << ": total time = "
 		<< snoop.getTimeInSeconds() 
 		<< " secs" << std::endl;
-    QDPIO::cout << InlineSUM_PROPSEnv::name << ": ran successfully" << std::endl;
+    QDPIO::cout << InlineSum_PropsEnv::name << ": ran successfully" << std::endl;
     END_CODE();
   } 
 }
