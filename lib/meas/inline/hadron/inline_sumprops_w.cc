@@ -405,10 +405,11 @@ namespace Chroma
 		<< swatch.getTimeInSeconds() 
 		<< " secs" << std::endl;
     pop(XmlOut);   // SUM_PROPS
-    snoop.stop();
-    QDPIO::cout << InlineSum_PropsEnv::name << ": total time = "
-		<< snoop.getTimeInSeconds() 
-		<< " secs" << std::endl;
+    //snoop.stop();
+    //QDPIO::cout << InlineSum_PropsEnv::name << ": total time = "
+	//	<< snoop.getTimeInSeconds() 
+	//	<< " secs" << std::endl;
+
     QDPIO::cout << InlineSum_PropsEnv::name << ": ran successfully" << std::endl;
     END_CODE();
   } 
