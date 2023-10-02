@@ -1,0 +1,347 @@
+<?xml version="1.0"?>
+
+
+<chroma>
+  <Input><chroma>
+<annotation>
+Hadron spectrum input
+</annotation>
+<Param> 
+  <InlineMeasurements>
+
+    <elem>
+    <Name>QIO_READ_NAMED_OBJECT</Name>
+    <Frequency>1</Frequency>
+    <NamedObject>
+      <object_id>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0</object_id>
+      <object_type>LatticePropagatorF</object_type>
+    </NamedObject>
+    <File>
+      <file_name>/work/hmonge/compartida/ChromaScriptsKabre/run_tests/mom_props/2980/prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0.lime</file_name>
+      <file_volfmt>SINGLEFILE</file_volfmt>
+      <parallel_io>true</parallel_io>
+    </File>
+    </elem>
+
+    <elem>
+    <Name>QIO_READ_NAMED_OBJECT</Name>
+    <Frequency>1</Frequency>
+    <NamedObject>
+      <object_id>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx5ny5nz0nt0</object_id>
+      <object_type>LatticePropagatorF</object_type>
+    </NamedObject>
+    <File>
+      <file_name>/work/hmonge/compartida/ChromaScriptsKabre/run_tests/mom_props/2980/prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx5ny5nz0nt0.lime</file_name>
+      <file_volfmt>SINGLEFILE</file_volfmt>
+      <parallel_io>true</parallel_io>
+    </File>
+    </elem>
+
+<!-- Agregamos la medición de una suma de 2 propagadores multiplicados por 
+una constante que nos dan un propagador resultante -->
+
+    <elem>
+      <Name>SUM_PROPS</Name>
+      <Param>
+         <version>1</version>
+         <current>V4</current>
+         <cons_1>0.707</cons_1> <!-- Constante 1 -->
+         <cons_2>0.707</cons_2> <!-- Constante 2 -->
+         <file_name>myout.out.xml</file_name>
+      </Param>
+      <NamedObject>
+        <gauge_id>default_gauge_field</gauge_id>
+        <prop_1>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0</prop_1> <!-- Propagador 1 -->
+        <prop_2>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx5ny5nz0nt0</prop_2> <!-- Propagador 2 -->
+	    <prop_r>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0_nx5ny5nz0nt0</prop_r> <!-- Propagador resultante -->
+      </NamedObject>
+    </elem>
+
+  </InlineMeasurements>
+   <nrow>16 16 16 48</nrow>
+</Param>
+
+<RNG>
+  <Seed>	
+    <elem>11</elem>
+    <elem>11</elem>
+    <elem>11</elem>
+    <elem>0</elem>
+  </Seed>
+</RNG>
+
+<Cfg>
+ <cfg_type>WEAK_FIELD</cfg_type>
+ <cfg_file>dummy</cfg_file>
+</Cfg>
+</chroma>
+
+  </Input>
+  <ProgramInfo>
+    <code_version>
+      <chroma>3.44.1</chroma>
+      <qdp>0.1</qdp>
+      <basePrecision>64</basePrecision>
+    </code_version>
+    <run_date>12 Sep 23 11:52:51 CST</run_date>
+    <Setgeom>
+      <latt_size>16 16 16 48</latt_size>
+      <logical_size>1 1 1 1</logical_size>
+      <subgrid_size>16 16 16 48</subgrid_size>
+      <total_volume>196608</total_volume>
+      <subgrid_volume>196608</subgrid_volume>
+    </Setgeom>
+  </ProgramInfo>
+  <RNG>
+    <Seed>
+      <elem>11</elem>
+      <elem>11</elem>
+      <elem>11</elem>
+      <elem>0</elem>
+    </Seed>
+  </RNG>
+  <Config_info><weak_field>
+</weak_field>
+
+  </Config_info>
+  <Observables>
+    <w_plaq>0.994740457098181</w_plaq>
+    <s_plaq>0.994740463211465</s_plaq>
+    <t_plaq>0.994740450984898</t_plaq>
+    <plane_01_plaq>0.99474916000747</plane_01_plaq>
+    <plane_02_plaq>0.994733552579405</plane_02_plaq>
+    <plane_12_plaq>0.994738677047521</plane_12_plaq>
+    <plane_03_plaq>0.994740777297363</plane_03_plaq>
+    <plane_13_plaq>0.994743255739078</plane_13_plaq>
+    <plane_23_plaq>0.994737319918252</plane_23_plaq>
+    <link>0.379327706301883</link>
+    <pollp>
+      <elem>
+        <re>0.584297189760573</re>
+        <im>-0.0680280778561009</im>
+      </elem>
+      <elem>
+        <re>0.584088885675894</re>
+        <im>-0.0681880991080705</im>
+      </elem>
+      <elem>
+        <re>0.584354760489269</re>
+        <im>-0.0679582867619992</im>
+      </elem>
+      <elem>
+        <re>-0.38114557793654</re>
+        <im>-0.61935685564453</im>
+      </elem>
+    </pollp>
+  </Observables>
+  <InlineObservables>
+    <elem>
+      <qio_read_named_obj>
+        <update_no>0</update_no>
+        <object_id>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0</object_id>
+      </qio_read_named_obj>
+    </elem>
+    <elem>
+      <qio_read_named_obj>
+        <update_no>0</update_no>
+        <object_id>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx5ny5nz0nt0</object_id>
+      </qio_read_named_obj>
+    </elem>
+    <elem>
+      <SUM_PROPS>
+        <update_no>0</update_no>
+        <ProgramInfo>
+          <code_version>
+            <chroma>3.44.1</chroma>
+            <qdp>0.1</qdp>
+            <basePrecision>64</basePrecision>
+          </code_version>
+          <run_date>12 Sep 23 11:53:11 CST</run_date>
+          <Setgeom>
+            <latt_size>16 16 16 48</latt_size>
+            <logical_size>1 1 1 1</logical_size>
+            <subgrid_size>16 16 16 48</subgrid_size>
+            <total_volume>196608</total_volume>
+            <subgrid_volume>196608</subgrid_volume>
+          </Setgeom>
+        </ProgramInfo>
+        <Output_version>
+          <out_version>2</out_version>
+        </Output_version>
+        <Input>
+          <Param>
+            <version>1</version>
+            <cons_1>0.707</cons_1>
+            <cons_1>0.707</cons_1><?xml version="1.0"?>
+
+
+<FermState>
+  <Name>PERIODIC_FERM_STATE</Name>
+</FermState>
+</Param>
+          <NamedObject>
+            <gauge_id>default_gauge_field</gauge_id>
+            <prop_1>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0</prop_1>
+            <prop_2>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx5ny5nz0nt0</prop_2>
+            <prop_r>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0_nx5ny5nz0nt0</prop_r>
+          </NamedObject>
+          <xml_file></xml_file>
+        </Input>
+        <Config_info><weak_field>
+</weak_field>
+
+
+
+        </Config_info>
+        <ForwardProp>
+          <PropXML><propagator>
+      <id>747691147</id>
+    </propagator>
+
+          </PropXML>
+          <PropRecordXML><Propagator>
+      <version>1</version>
+      <ForwardProp>
+        <version>9</version>
+        <quarkSpinType>FULL</quarkSpinType>
+        <obsvP>true</obsvP>
+        <q_mp_id/>
+        <FermionAction>
+          <FermAct>UNPRECONDITIONED_NEF</FermAct>
+          <OverMass>1.3</OverMass>
+          <N5>12</N5>
+          <b5>1.5</b5>
+          <c5>0.5</c5>
+          <Mass>0.0278</Mass>
+          <FermionBC>
+            <FermBC>SIMPLE_FERMBC</FermBC>
+            <boundary>1 1 1 -1</boundary>
+          </FermionBC>
+        </FermionAction>
+        <InvertParam>
+          <invType>QUDA_NEF_INVERTER</invType>
+          <DoCGNR>true</DoCGNR>
+          <MaxIter>2000</MaxIter>
+          <RsdTarget>1.e-7</RsdTarget>
+          <Delta>0.1</Delta>
+          <RsdToleranceFactor>80</RsdToleranceFactor>
+          <MaxResIncrease>1</MaxResIncrease>
+          <SolverType>CG</SolverType>
+          <Verbose>false</Verbose>
+          <AsymmetricLinop>false</AsymmetricLinop>
+          <CudaReconstruct>RECONS_NONE</CudaReconstruct>
+          <CudaSloppyPrecision>HALF</CudaSloppyPrecision>
+          <CudaSloppyReconstruct>RECONS_12</CudaSloppyReconstruct>
+          <AxialGaugeFix>false</AxialGaugeFix>
+          <AutotuneDslash>true</AutotuneDslash>
+          <MatPCType>EVEN_EVEN</MatPCType>
+          <checkSolution>false</checkSolution>
+          <NEFParams>
+            <OverMass>1.3</OverMass>
+            <N5>12</N5>
+            <b5>1.5</b5>
+            <c5>0.5</c5>
+            <Mass>0.0278</Mass>
+            <clovCoeff>0</clovCoeff>
+          </NEFParams>
+          <AntiPeriodicT>true</AntiPeriodicT>
+        </InvertParam>
+      </ForwardProp>
+      <PropSource>
+        <version>6</version>
+        <Source>
+          <version>1</version>
+          <SourceType>MOMENTUM_VOLUME_SOURCE</SourceType>
+          <j_decay>3</j_decay>
+          <mom>0 5 5 0</mom>
+          <av_mom>false</av_mom>
+          <t_srce>0 0 0 0</t_srce>
+        </Source>
+        <j_decay>3</j_decay>
+        <t_source>0</t_source>
+      </PropSource>
+      <Config_info>
+        <MILC>
+          <date>Tue Sep 12 04:42:43 2017</date>
+          <nrow>16 16 16 48</nrow>
+        </MILC>
+      </Config_info>
+    </Propagator>
+
+          </PropRecordXML>
+          <PropCheck>1250.12427282795 1577.13296155974 1813.84131019807 1888.48788209146 1917.218586842 1929.18672496199 1927.09436505453 1932.05399924544 1931.65422316819 1943.72695811373 1976.88657850126 1991.2948754572 1989.77258487247 1985.89017250737 1970.67115888561 1961.35280689298 1947.16372099597 1927.07294385921 1921.36849093204 1915.1817088394 1912.68839020468 1915.34654564118 1933.41645875283 1951.38916082005 1942.54424939769 1959.35523425767 2015.72669278559 1982.02203276611 1936.12708175716 1921.88174923403 1919.94525865694 1912.31941527442 1910.15969157817 1911.32010594961 1912.37581537305 1913.59104076394 1918.8317193991 1924.83379154577 1935.34566682756 1949.87396727691 1969.6106714197 1952.20235594788 1913.55853904989 1907.52126797889 1903.1827531569 1852.46619194736 1639.86272684588 1283.43982760055</PropCheck>
+        </ForwardProp>
+        <ForwardProp>
+          <PropXML><propagator>
+      <id>747689399</id>
+    </propagator>
+
+          </PropXML>
+          <PropRecordXML><Propagator>
+      <version>1</version>
+      <ForwardProp>
+        <version>9</version>
+        <quarkSpinType>FULL</quarkSpinType>
+        <obsvP>true</obsvP>
+        <q_mp_id/>
+        <FermionAction>
+          <FermAct>UNPRECONDITIONED_NEF</FermAct>
+          <OverMass>1.3</OverMass>
+          <N5>12</N5>
+          <b5>1.5</b5>
+          <c5>0.5</c5>
+          <Mass>0.0278</Mass>
+          <FermionBC>
+            <FermBC>SIMPLE_FERMBC</FermBC>
+            <boundary>1 1 1 -1</boundary>
+          </FermionBC>
+        </FermionAction>
+        <InvertParam>
+          <invType>QUDA_NEF_INVERTER</invType>
+          <DoCGNR>true</DoCGNR>
+          <MaxIter>2000</MaxIter>
+          <RsdTarget>1.e-7</RsdTarget>
+          <Delta>0.1</Delta>
+          <RsdToleranceFactor>80</RsdToleranceFactor>
+          <MaxResIncrease>1</MaxResIncrease>
+          <SolverType>CG</SolverType>
+          <Verbose>false</Verbose>
+          <AsymmetricLinop>false</AsymmetricLinop>
+          <CudaReconstruct>RECONS_NONE</CudaReconstruct>
+          <CudaSloppyPrecision>HALF</CudaSloppyPrecision>
+          <CudaSloppyReconstruct>RECONS_12</CudaSloppyReconstruct>
+          <AxialGaugeFix>false</AxialGaugeFix>
+          <AutotuneDslash>true</AutotuneDslash>
+          <MatPCType>EVEN_EVEN</MatPCType>
+          <checkSolution>false</checkSolution>
+          <NEFParams>
+            <OverMass>1.3</OverMass>
+            <N5>12</N5>
+            <b5>1.5</b5>
+            <c5>0.5</c5>
+            <Mass>0.0278</Mass>
+            <clovCoeff>0</clovCoeff>
+          </NEFParams>
+          <AntiPeriodicT>true</AntiPeriodicT>
+        </InvertParam>
+      </ForwardProp>
+      <PropSource>
+        <version>6</version>
+        <Source>
+          <version>1</version>
+          <SourceType>MOMENTUM_VOLUME_SOURCE</SourceType>
+          <j_decay>3</j_decay>
+          <mom>5 5 0 0</mom>
+          <av_mom>false</av_mom>
+          <t_srce>0 0 0 0</t_srce>
+        </Source>
+        <j_decay>3</j_decay>
+        <t_source>0</t_source>
+      </PropSource>
+      <Config_info>
+        <MILC>
+          <date>Tue Sep 12 04:42:43 2017</date>
+          <nrow>16 16 16 48</nrow>
+        </MILC>
+      </Config_info>
+    </Propagator>

@@ -359,6 +359,44 @@ namespace Chroma
     //write(prop_xml,"origin",t_src);
     //write(prop_xml,"t_dir",t_dir);
     pop(prop_xml) ;
+
+
+
+/*
+    LatticeHalfFermion entrada;
+    LatticeHalfFermion salida=0;
+
+    multi1d <complex> temp;
+    temp.resize(100);
+ 
+ *  for i in range(0,100):
+ *      //salida=random(-1,1)*entrada;    
+ *
+ *      for s1 in range(0,4)
+ *            for c1 in range(0,3)
+ *                salida.elem(s1).elem(c1).elem().real()=random(-1,1);
+ *                //salida.elem(s1).elem(c1).elem().imag()=random(-1,1);
+ *
+ *      entrada = salida;
+ *      //salida= Dirac*salida;// 
+ *      //temp[i] +=  entrada*entrada;
+ *      temp[i] +=  entrada*salida;
+ *      
+ *  complex acumulado=0;   
+ *  for i in range(0,100):     
+ *    acumulado+=temp[i];
+ *
+ *  acumulado/=100;
+ *
+ *  int entradasDiagonal = QDP::Layout::vol()*12;
+ *  
+ *  esperado=acumulado/entradasDiagonal; //Este deberia ser 1 real
+ *
+ *  */
+
+
+
+
    
      //end ale
     //close(qio_file);

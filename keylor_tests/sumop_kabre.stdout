@@ -1,0 +1,150 @@
+Setting CUDA device
+Initializing QMP part
+Initialize done
+Global Rank: 0 of 1 Host: nukwa-06.cnca  Local Rank: 0 of 1 Setting CUDA Device to 0 
+GPU properties
+  Compute capability (major,minor)    : 7,0
+  Shared memory                       : 48 KB
+  Max grid  (x,y,z)                   : (1073741824,32768,32768)
+  Max block (x,y,z)                   : (1024,1024,64)
+  GPU memory (free,total)             : 32203/32510 MB
+Calling initCommsGridQuda
+calling initCommsGridQuda with ndim = 4 and geom=( 1, 1, 1, 1 )
+Initializing QUDA device (using CUDA device no. 0)
+QUDA 1.1.0 (git 1.1.0-9ffceca-sm_70)
+CUDA Driver version = 11070
+CUDA Runtime version = 11060
+Graphic driver version = 515.65.01
+Found device 0: Tesla V100-PCIE-32GB
+Using device 0: Tesla V100-PCIE-32GB
+WARNING: Data reordering done on GPU (set with QUDA_REORDER_LOCATION=GPU/CPU)
+Initializing QDP-JIT GPUs
+LLVM initialization
+  Target machine CPU                  : sm_70
+  Target triple                       : nvptx64-nvidia-cuda
+Initializing QUDA memory
+WARNING: Cache file not found.  All kernels will be re-tuned (if tuning is enabled).
+WARNING: Cache file not found.  All kernels will be re-tuned (if tuning is enabled).
+WARNING: Using device memory pool allocator
+WARNING: Using pinned memory pool allocator
+cublasCreated successfully
+Linkage = bool Chroma::MapObjectDiskEnv::registerAll(): registering map obj key colorvec
+0
+InlineMeasurements are: 
+<InlineMeasurements>
+
+    <elem>
+    <Name>QIO_READ_NAMED_OBJECT</Name>
+    <Frequency>1</Frequency>
+    <NamedObject>
+      <object_id>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0</object_id>
+      <object_type>LatticePropagatorF</object_type>
+    </NamedObject>
+    <File>
+      <file_name>/work/hmonge/compartida/ChromaScriptsKabre/run_tests/mom_props/2980/prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0.lime</file_name>
+      <file_volfmt>SINGLEFILE</file_volfmt>
+      <parallel_io>true</parallel_io>
+    </File>
+    </elem>
+
+    <elem>
+    <Name>QIO_READ_NAMED_OBJECT</Name>
+    <Frequency>1</Frequency>
+    <NamedObject>
+      <object_id>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx5ny5nz0nt0</object_id>
+      <object_type>LatticePropagatorF</object_type>
+    </NamedObject>
+    <File>
+      <file_name>/work/hmonge/compartida/ChromaScriptsKabre/run_tests/mom_props/2980/prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx5ny5nz0nt0.lime</file_name>
+      <file_volfmt>SINGLEFILE</file_volfmt>
+      <parallel_io>true</parallel_io>
+    </File>
+    </elem>
+
+<!-- Agregamos la medición de una suma de 2 propagadores multiplicados por 
+una constante que nos dan un propagador resultante -->
+
+    <elem>
+      <Name>SUM_PROPS</Name>
+      <Param>
+         <version>1</version>
+         <current>V4</current>
+         <cons_1>0.707</cons_1> <!-- Constante 1 -->
+         <cons_2>0.707</cons_2> <!-- Constante 2 -->
+         <file_name>myout.out.xml</file_name>
+      </Param>
+      <NamedObject>
+        <gauge_id>default_gauge_field</gauge_id>
+        <prop_1>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0</prop_1> <!-- Propagador 1 -->
+        <prop_2>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx5ny5nz0nt0</prop_2> <!-- Propagador 2 -->
+	    <prop_r>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0_nx5ny5nz0nt0</prop_r> <!-- Propagador resultante -->
+      </NamedObject>
+    </elem>
+
+  </InlineMeasurements>
+
+Lattice initialized:
+  problem size = 16 16 16 48
+  layout size = 8 16 16 48
+  logical machine size = 1 1 1 1
+  subgrid size = 16 16 16 48
+  total number of nodes = 1
+  total volume = 196608
+  subgrid volume = 196608
+Memory pool config:
+  memory pool size (per fraction)     : 29627 MB
+Base precision                        : 64
+Accurate timing                       : 0
+Code generation:
+  CUDA flush denormals to zero        : 0
+  Shift optimization                  : 0
+  Propagator optimization             : 1
+Launch configuration:
+  Threads per block                   : 128
+  Using GPU direct                    : 0
+Finished init of RNG
+Finished lattice layout
+CHROMA: Attempt to read gauge field
+CHROMA: Gauge initialization: cfg_type = WEAK_FIELD
+Starting up a weak field config
+CHROMA: Gauge field successfully read: time= 2.865452 secs
+CHROMA: initial plaquette measurement time=1.705695 secs
+CHROMA: There are 3 measurements 
+CHROMA: parsing inline measurements time=0.002014 secs
+CHROMA: Doing 3 measurements
+QIO_READ_NAMED_OBJECT: object reader
+Attempt to read object name = prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0
+Attempting Parallel IO read
+Single Precision Read
+QIO_read_finished
+Object successfully read: time= 8.243728 secs
+QIO_READ_NAMED_OBJECT: ran successfully
+QIO_READ_NAMED_OBJECT: object reader
+Attempt to read object name = prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx5ny5nz0nt0
+Attempting Parallel IO read
+Single Precision Read
+QIO_read_finished
+Object successfully read: time= 7.322112 secs
+QIO_READ_NAMED_OBJECT: ran successfully
+Attempt to initialize the gauge field
+cfs=XX<?xml version="1.0"?>
+
+
+<FermState>
+  <Name>PERIODIC_FERM_STATE</Name>
+</FermState>
+XX
+Attempt to parse forward propagator
+parsing forward propagator prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0 ... 
+Attempt to parse forward propagator
+parsing forward propagatorprop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx5ny5nz0nt0...
+forward propagator check = 1250.12427282795
+Forward propagator successfully parsed
+forward propagator check = 1255.89141683362
+Forward propagator successfully parsed
+getTimeInSeconds: either stopwatch not started, or not stopped
+QMP m0,n1@nukwa-06.cnca error: abort: 1
+application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
+slurmstepd: error: *** STEP 107777.0 ON nukwa-06.cnca CANCELLED AT 2023-09-12T11:53:13 ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+finished calculating SUM_PROPS  time= srun: error: nukwa-06.cnca: task 0: Killed
