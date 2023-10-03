@@ -400,10 +400,10 @@ namespace Chroma
    
      //end ale
     //close(qio_file);
-    QDPIO::cout << "finished calculating SUM_PROPS"
-		<< "  time= "
-		<< swatch.getTimeInSeconds() 
-		<< " secs" << std::endl;
+    //QDPIO::cout << "finished calculating SUM_PROPS"
+	//	<< "  time= "
+	//	<< swatch.getTimeInSeconds() 
+	//	<< " secs" << std::endl;
     pop(XmlOut);   // SUM_PROPS
     //snoop.stop();
     //QDPIO::cout << InlineSum_PropsEnv::name << ": total time = "
