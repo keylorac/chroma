@@ -8,40 +8,41 @@ Hadron spectrum input
 </annotation>
 <Param> 
   <InlineMeasurements>
-
-    <elem>
-    <Name>QIO_READ_NAMED_OBJECT</Name>
-    <Frequency>1</Frequency>
-    <NamedObject>
-      <object_id>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0</object_id>
-      <object_type>LatticePropagatorF</object_type>
-    </NamedObject>
+​
+  <elem>
+   <Name>QIO_READ_NAMED_OBJECT</Name>
+    
+     <NamedObject>
+      <object_id>prop_src1_x0y0z0t1</object_id>
+      <object_type>LatticePropagator</object_type>
+     </NamedObject>
     <File>
-      <file_name>/work/hmonge/compartida/ChromaScriptsKabre/run_tests/mom_props/2980/prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0.lime</file_name>
-      <file_volfmt>SINGLEFILE</file_volfmt>
-      <parallel_io>true</parallel_io>
+     <file_name>/work/hmonge/compartida/ChromaScriptsKabre/run_tests/props/prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2200_mom_nx4ny4nz0nt0.lime</file_name>
+     <file_volfmt>SINGLEFILE</file_volfmt>
+     <parallel_io>true</parallel_io>
     </File>
-    </elem>
-
-    <elem>
-    <Name>QIO_READ_NAMED_OBJECT</Name>
-    <Frequency>1</Frequency>
-    <NamedObject>
-      <object_id>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx5ny5nz0nt0</object_id>
-      <object_type>LatticePropagatorF</object_type>
-    </NamedObject>
+  </elem>
+​
+  <elem>
+   <Name>QIO_READ_NAMED_OBJECT</Name>
+     <Frequency>1</Frequency>
+     <NamedObject>
+      <object_id>prop_src2_x1y1z1t2</object_id>
+      <object_type>LatticePropagator</object_type>
+     </NamedObject>
     <File>
-      <file_name>/work/hmonge/compartida/ChromaScriptsKabre/run_tests/mom_props/2980/prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx5ny5nz0nt0.lime</file_name>
-      <file_volfmt>SINGLEFILE</file_volfmt>
-      <parallel_io>true</parallel_io>
+     <file_name>/work/hmonge/compartida/ChromaScriptsKabre/run_tests/props/prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2200_mom_nx0ny4nz4nt0.lime</file_name>
+     <file_volfmt>SINGLEFILE</file_volfmt>
+     <parallel_io>true</parallel_io>
     </File>
-    </elem>
+  </elem>
+​
 
 <!-- Agregamos la medición de una suma de 2 propagadores multiplicados por 
 una constante que nos dan un propagador resultante -->
 
     <elem>
-      <Name>SUM_PROPS</Name>
+      <Name>HUTCHINSON_ESTIMATOR_TRACE</Name>
       <Param>
          <version>1</version>
          <current>V4</current>
@@ -51,16 +52,18 @@ una constante que nos dan un propagador resultante -->
       </Param>
       <NamedObject>
         <gauge_id>default_gauge_field</gauge_id>
-        <prop_1>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0</prop_1> <!-- Propagador 1 -->
-        <prop_2>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx5ny5nz0nt0</prop_2> <!-- Propagador 2 -->
-	    <prop_r>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0_nx5ny5nz0nt0</prop_r> <!-- Propagador resultante -->
+        <source_id>sh_source_1</source_id>
+        <prop_1>prop_src1_x0y0z0t1</prop_1> <!-- Propagador 1 -->
+        <prop_2>prop_src2_x1y1z1t2</prop_2> <!-- Propagador 2 -->
+    <prop_r>prop_src3_x0y0z0t1_x1y1z1t2</prop_r> <!-- Propagador resultante -->
       </NamedObject>
     </elem>
 
+​
   </InlineMeasurements>
    <nrow>16 16 16 48</nrow>
 </Param>
-
+​
 <RNG>
   <Seed>	
     <elem>11</elem>
@@ -69,7 +72,7 @@ una constante que nos dan un propagador resultante -->
     <elem>0</elem>
   </Seed>
 </RNG>
-
+​
 <Cfg>
  <cfg_type>WEAK_FIELD</cfg_type>
  <cfg_file>dummy</cfg_file>
@@ -83,7 +86,7 @@ una constante que nos dan un propagador resultante -->
       <qdp>0.1</qdp>
       <basePrecision>64</basePrecision>
     </code_version>
-    <run_date>28 Dec 23 19:32:02 CST</run_date>
+    <run_date>16 Jan 24 07:48:46 CST</run_date>
     <Setgeom>
       <latt_size>16 16 16 48</latt_size>
       <logical_size>1 1 1 1</logical_size>
@@ -138,17 +141,17 @@ una constante que nos dan un propagador resultante -->
     <elem>
       <qio_read_named_obj>
         <update_no>0</update_no>
-        <object_id>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0</object_id>
+        <object_id>prop_src1_x0y0z0t1</object_id>
       </qio_read_named_obj>
     </elem>
     <elem>
       <qio_read_named_obj>
         <update_no>0</update_no>
-        <object_id>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx5ny5nz0nt0</object_id>
+        <object_id>prop_src2_x1y1z1t2</object_id>
       </qio_read_named_obj>
     </elem>
     <elem>
-      <SUM_PROPS>
+      <HUTCHINSON_ESTIMATOR_TRACE>
         <update_no>0</update_no>
         <ProgramInfo>
           <code_version>
@@ -156,7 +159,7 @@ una constante que nos dan un propagador resultante -->
             <qdp>0.1</qdp>
             <basePrecision>64</basePrecision>
           </code_version>
-          <run_date>28 Dec 23 19:32:09 CST</run_date>
+          <run_date>16 Jan 24 07:48:52 CST</run_date>
           <Setgeom>
             <latt_size>16 16 16 48</latt_size>
             <logical_size>1 1 1 1</logical_size>
@@ -181,9 +184,9 @@ una constante que nos dan un propagador resultante -->
 </Param>
           <NamedObject>
             <gauge_id>default_gauge_field</gauge_id>
-            <prop_1>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0</prop_1>
-            <prop_2>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx5ny5nz0nt0</prop_2>
-            <prop_r>prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0_nx5ny5nz0nt0</prop_r>
+            <prop_1>prop_src1_x0y0z0t1</prop_1>
+            <prop_2>prop_src2_x1y1z1t2</prop_2>
+            <prop_r>prop_src3_x0y0z0t1_x1y1z1t2</prop_r>
           </NamedObject>
           <xml_file></xml_file>
         </Input>
@@ -195,7 +198,7 @@ una constante que nos dan un propagador resultante -->
         </Config_info>
         <ForwardProp>
           <PropXML><propagator>
-      <id>747691147</id>
+      <id>730743316</id>
     </propagator>
 
           </PropXML>
@@ -205,7 +208,6 @@ una constante que nos dan un propagador resultante -->
         <version>9</version>
         <quarkSpinType>FULL</quarkSpinType>
         <obsvP>true</obsvP>
-        <q_mp_id/>
         <FermionAction>
           <FermAct>UNPRECONDITIONED_NEF</FermAct>
           <OverMass>1.3</OverMass>
@@ -253,7 +255,7 @@ una constante que nos dan un propagador resultante -->
           <version>1</version>
           <SourceType>MOMENTUM_VOLUME_SOURCE</SourceType>
           <j_decay>3</j_decay>
-          <mom>0 5 5 0</mom>
+          <mom>4 4 0 0</mom>
           <av_mom>false</av_mom>
           <t_srce>0 0 0 0</t_srce>
         </Source>
@@ -261,19 +263,23 @@ una constante que nos dan un propagador resultante -->
         <t_source>0</t_source>
       </PropSource>
       <Config_info>
-        <MILC>
-          <date>Tue Sep 12 04:42:43 2017</date>
-          <nrow>16 16 16 48</nrow>
-        </MILC>
+        <usqcdInfo>
+          <version>1.0</version>
+          <plaq>5.346343e-01</plaq>
+          <linktr>5.589709e-05</linktr>
+          <info>gauge.previous.filename = cfgs/l1648f211b580m0217m065m838a.2200
+gauge.previous.time_stamp = Mon Sep 11 11:26:36 2017
+</info>
+        </usqcdInfo>
       </Config_info>
     </Propagator>
 
           </PropRecordXML>
-          <PropCheck>1250.12427282795 1577.13296155974 1813.84131019807 1888.48788209146 1917.218586842 1929.18672496199 1927.09436505453 1932.05399924544 1931.65422316819 1943.72695811373 1976.88657850126 1991.2948754572 1989.77258487247 1985.89017250737 1970.67115888561 1961.35280689298 1947.16372099597 1927.07294385921 1921.36849093204 1915.1817088394 1912.68839020468 1915.34654564118 1933.41645875283 1951.38916082005 1942.54424939769 1959.35523425767 2015.72669278559 1982.02203276611 1936.12708175716 1921.88174923403 1919.94525865694 1912.31941527442 1910.15969157817 1911.32010594961 1912.37581537305 1913.59104076394 1918.8317193991 1924.83379154577 1935.34566682756 1949.87396727691 1969.6106714197 1952.20235594788 1913.55853904989 1907.52126797889 1903.1827531569 1852.46619194736 1639.86272684588 1283.43982760055</PropCheck>
+          <PropCheck>3374.53677601315 4511.72761980844 5310.6843491196 5603.18554658832 5707.61820461506 5743.5478487627 5764.35619547207 5781.35472765821 5753.34115857309 5737.80537203835 5806.06600567739 5836.60181694637 5861.51499801591 5908.90937755984 5966.08333242961 6021.48468221372 6033.17966782035 5953.12342856068 5858.33226291955 5796.55382221198 5769.64521840969 5750.8011528993 5761.10695463292 5777.17308104667 5740.22410933136 5699.69075195274 5697.95090011268 5692.71528227955 5674.40528329767 5687.59449837218 5749.74954189305 5819.84216939689 5813.38945253347 5750.39529194693 5701.75936428638 5657.2152974637 5623.90393449209 5636.00631884942 5683.37176172722 5782.50387527096 5864.18493652837 5853.83032415449 5836.72584970648 5877.93471213916 5928.08300878665 5812.66243900773 5059.30505312268 3566.47434683723</PropCheck>
         </ForwardProp>
         <ForwardProp>
           <PropXML><propagator>
-      <id>747689399</id>
+      <id>730743137</id>
     </propagator>
 
           </PropXML>
@@ -283,7 +289,6 @@ una constante que nos dan un propagador resultante -->
         <version>9</version>
         <quarkSpinType>FULL</quarkSpinType>
         <obsvP>true</obsvP>
-        <q_mp_id/>
         <FermionAction>
           <FermAct>UNPRECONDITIONED_NEF</FermAct>
           <OverMass>1.3</OverMass>
@@ -331,7 +336,7 @@ una constante que nos dan un propagador resultante -->
           <version>1</version>
           <SourceType>MOMENTUM_VOLUME_SOURCE</SourceType>
           <j_decay>3</j_decay>
-          <mom>5 5 0 0</mom>
+          <mom>0 4 4 0</mom>
           <av_mom>false</av_mom>
           <t_srce>0 0 0 0</t_srce>
         </Source>
@@ -339,17 +344,21 @@ una constante que nos dan un propagador resultante -->
         <t_source>0</t_source>
       </PropSource>
       <Config_info>
-        <MILC>
-          <date>Tue Sep 12 04:42:43 2017</date>
-          <nrow>16 16 16 48</nrow>
-        </MILC>
+        <usqcdInfo>
+          <version>1.0</version>
+          <plaq>5.346343e-01</plaq>
+          <linktr>5.589709e-05</linktr>
+          <info>gauge.previous.filename = cfgs/l1648f211b580m0217m065m838a.2200
+gauge.previous.time_stamp = Mon Sep 11 11:26:36 2017
+</info>
+        </usqcdInfo>
       </Config_info>
     </Propagator>
 
           </PropRecordXML>
-          <PropCheck>1255.89141683362 1590.8314576802 1827.91788699464 1888.2745343474 1913.1819682014 1934.9468765063 1927.00891726334 1921.84769903036 1910.60303605969 1918.14452431245 1946.79502136832 1949.38783919806 1932.75465843475 1929.3257738982 1930.25827361669 1934.62124245835 1936.93231198753 1925.4941126329 1914.21568831931 1897.07703170323 1891.42184163019 1895.3985555414 1916.9338766781 1943.65931049161 1954.92662600792 1989.14488060645 2051.18507191048 1998.25749414726 1947.77421501905 1932.05768156001 1927.56809905756 1919.45648658431 1913.83975108687 1915.32820242839 1919.69343649707 1912.52386528048 1902.03787248853 1899.39842337858 1911.91462558509 1932.19805131315 1962.514442984 1989.1307283417 1977.60926205015 1954.27820515897 1923.80169812152 1854.46069299666 1629.74952885696 1279.63311029146</PropCheck>
+          <PropCheck>3338.76917480258 4513.25506465796 5360.06445037354 5704.74387903226 5840.89126418696 5859.58243048037 5865.99537900062 5901.42792276924 5899.01699656963 5862.89888552576 5862.10466996145 5827.15875663208 5833.22105306321 5910.60078713285 5996.47908913064 6072.24550467667 6154.76990114557 6061.93841292152 5920.95130907205 5866.43128551117 5859.9907712227 5850.12581818018 5821.24091323197 5788.58508126508 5728.78091749013 5706.9799002206 5742.83986038358 5765.96434442412 5773.51973177058 5786.1700726523 5828.37066367502 5849.48589045262 5804.73789955285 5728.9384808239 5685.14683104465 5672.43498023362 5674.01696018506 5686.89889175402 5728.12025400387 5825.36120215207 5901.85172458497 5863.39375102612 5803.80525927601 5798.29125044791 5797.95355049387 5641.73806652162 4885.83050318983 3477.50243800749</PropCheck>
         </ForwardProp>
-      </SUM_PROPS>
+      </HUTCHINSON_ESTIMATOR_TRACE>
     </elem>
   </InlineObservables>
 </chroma>

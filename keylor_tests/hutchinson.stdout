@@ -1,0 +1,325 @@
+Setting CUDA device
+Initializing QMP part
+Initialize done
+Global Rank: 0 of 1 Host: nukwa-07.cnca  Local Rank: 0 of 1 Setting CUDA Device to 0 
+GPU properties
+  Compute capability (major,minor)    : 7,0
+  Shared memory                       : 48 KB
+  Max grid  (x,y,z)                   : (1073741824,32768,32768)
+  Max block (x,y,z)                   : (1024,1024,64)
+  GPU memory (free,total)             : 32202/32510 MB
+Calling initCommsGridQuda
+calling initCommsGridQuda with ndim = 4 and geom=( 1, 1, 1, 1 )
+Initializing QUDA device (using CUDA device no. 0)
+QUDA 1.1.0 (git 1.1.0-32bb266-sm_70)
+CUDA Driver version = 11080
+CUDA Runtime version = 11060
+Graphic driver version = 520.61.05
+Found device 0: Tesla V100-PCIE-32GB
+Using device 0: Tesla V100-PCIE-32GB
+WARNING: Data reordering done on GPU (set with QUDA_REORDER_LOCATION=GPU/CPU)
+Initializing QDP-JIT GPUs
+LLVM initialization
+  Target machine CPU                  : sm_70
+  Target triple                       : nvptx64-nvidia-cuda
+Initializing QUDA memory
+WARNING: Cache file not found.  All kernels will be re-tuned (if tuning is enabled).
+WARNING: Cache file not found.  All kernels will be re-tuned (if tuning is enabled).
+WARNING: Using device memory pool allocator
+WARNING: Using pinned memory pool allocator
+cublasCreated successfully
+Linkage = bool Chroma::MapObjectDiskEnv::registerAll(): registering map obj key colorvec
+0
+InlineMeasurements are: 
+<InlineMeasurements>
+​
+  <elem>
+   <Name>QIO_READ_NAMED_OBJECT</Name>
+    
+     <NamedObject>
+      <object_id>prop_src1_x0y0z0t1</object_id>
+      <object_type>LatticePropagator</object_type>
+     </NamedObject>
+    <File>
+     <file_name>/work/hmonge/compartida/ChromaScriptsKabre/run_tests/props/prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2200_mom_nx4ny4nz0nt0.lime</file_name>
+     <file_volfmt>SINGLEFILE</file_volfmt>
+     <parallel_io>true</parallel_io>
+    </File>
+  </elem>
+​
+  <elem>
+   <Name>QIO_READ_NAMED_OBJECT</Name>
+     <Frequency>1</Frequency>
+     <NamedObject>
+      <object_id>prop_src2_x1y1z1t2</object_id>
+      <object_type>LatticePropagator</object_type>
+     </NamedObject>
+    <File>
+     <file_name>/work/hmonge/compartida/ChromaScriptsKabre/run_tests/props/prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2200_mom_nx0ny4nz4nt0.lime</file_name>
+     <file_volfmt>SINGLEFILE</file_volfmt>
+     <parallel_io>true</parallel_io>
+    </File>
+  </elem>
+​
+
+<!-- Agregamos la medición de una suma de 2 propagadores multiplicados por 
+una constante que nos dan un propagador resultante -->
+
+    <elem>
+      <Name>HUTCHINSON_ESTIMATOR_TRACE</Name>
+      <Param>
+         <version>1</version>
+         <current>V4</current>
+         <cons_1>0.707</cons_1> <!-- Constante 1 -->
+         <cons_2>0.707</cons_2> <!-- Constante 2 -->
+         <file_name>myout.out.xml</file_name>
+      </Param>
+      <NamedObject>
+        <gauge_id>default_gauge_field</gauge_id>
+        <source_id>sh_source_1</source_id>
+        <prop_1>prop_src1_x0y0z0t1</prop_1> <!-- Propagador 1 -->
+        <prop_2>prop_src2_x1y1z1t2</prop_2> <!-- Propagador 2 -->
+    <prop_r>prop_src3_x0y0z0t1_x1y1z1t2</prop_r> <!-- Propagador resultante -->
+      </NamedObject>
+    </elem>
+
+​
+  </InlineMeasurements>
+
+Lattice initialized:
+  problem size = 16 16 16 48
+  layout size = 8 16 16 48
+  logical machine size = 1 1 1 1
+  subgrid size = 16 16 16 48
+  total number of nodes = 1
+  total volume = 196608
+  subgrid volume = 196608
+Memory pool config:
+  memory pool size (per fraction)     : 29626 MB
+Base precision                        : 64
+Accurate timing                       : 0
+Code generation:
+  CUDA flush denormals to zero        : 0
+  Shift optimization                  : 0
+  Propagator optimization             : 1
+Launch configuration:
+  Threads per block                   : 128
+  Using GPU direct                    : 0
+Finished init of RNG
+Finished lattice layout
+CHROMA: Attempt to read gauge field
+CHROMA: Gauge initialization: cfg_type = WEAK_FIELD
+Starting up a weak field config
+CHROMA: Gauge field successfully read: time= 0.14439 secs
+CHROMA: initial plaquette measurement time=0.174844 secs
+CHROMA: There are 3 measurements 
+CHROMA: parsing inline measurements time=0.000935 secs
+CHROMA: Doing 3 measurements
+QIO_READ_NAMED_OBJECT: object reader
+Attempt to read object name = prop_src1_x0y0z0t1
+Attempting Parallel IO read
+Single Precision Read
+QIO_read_finished
+Object successfully read: time= 3.063472 secs
+QIO_READ_NAMED_OBJECT: ran successfully
+QIO_READ_NAMED_OBJECT: object reader
+Attempt to read object name = prop_src2_x1y1z1t2
+Attempting Parallel IO read
+Single Precision Read
+QIO_read_finished
+Object successfully read: time= 2.695231 secs
+QIO_READ_NAMED_OBJECT: ran successfully
+Attempt to initialize the gauge field
+cfs=XX<?xml version="1.0"?>
+
+
+<FermState>
+  <Name>PERIODIC_FERM_STATE</Name>
+</FermState>
+XX
+Attempt to parse forward propagator
+parsing forward propagator prop_src1_x0y0z0t1 ... 
+Attempt to parse forward propagator
+parsing forward propagatorprop_src2_x1y1z1t2...
+forward propagator check = 3374.53677601315
+Forward propagator successfully parsed
+forward propagator check = 3338.76917480258
+Forward propagator successfully parsed
+temp_0(1000,0,0) = -1+0i
+temp_0(1000,0,1) = -1+0i
+temp_0(1000,0,2) = -1+0i
+temp_0(1000,1,0) = -1+0i
+temp_0(1000,1,1) = 1+0i
+temp_0(1000,1,2) = -1+0i
+temp_0(1000,2,0) = -1+0i
+temp_0(1000,2,1) = -1+0i
+temp_0(1000,2,2) = 1+0i
+temp_0(1000,3,0) = -1+0i
+temp_0(1000,3,1) = -1+0i
+temp_0(1000,3,2) = 1+0i
+temp[0]2359296i
+temp_1(1000,0,0) = 1+0i
+temp_1(1000,0,1) = -1+0i
+temp_1(1000,0,2) = -1+0i
+temp_1(1000,1,0) = -1+0i
+temp_1(1000,1,1) = 1+0i
+temp_1(1000,1,2) = 1+0i
+temp_1(1000,2,0) = 1+0i
+temp_1(1000,2,1) = -1+0i
+temp_1(1000,2,2) = 1+0i
+temp_1(1000,3,0) = -1+0i
+temp_1(1000,3,1) = 1+0i
+temp_1(1000,3,2) = -1+0i
+temp[1]2359296i
+temp_2(1000,0,0) = -1+0i
+temp_2(1000,0,1) = -1+0i
+temp_2(1000,0,2) = 1+0i
+temp_2(1000,1,0) = -1+0i
+temp_2(1000,1,1) = 1+0i
+temp_2(1000,1,2) = 1+0i
+temp_2(1000,2,0) = 1+0i
+temp_2(1000,2,1) = -1+0i
+temp_2(1000,2,2) = 1+0i
+temp_2(1000,3,0) = 1+0i
+temp_2(1000,3,1) = 1+0i
+temp_2(1000,3,2) = -1+0i
+temp[2]2359296i
+temp_3(1000,0,0) = -1+0i
+temp_3(1000,0,1) = 1+0i
+temp_3(1000,0,2) = 1+0i
+temp_3(1000,1,0) = -1+0i
+temp_3(1000,1,1) = 1+0i
+temp_3(1000,1,2) = 1+0i
+temp_3(1000,2,0) = -1+0i
+temp_3(1000,2,1) = -1+0i
+temp_3(1000,2,2) = -1+0i
+temp_3(1000,3,0) = -1+0i
+temp_3(1000,3,1) = 1+0i
+temp_3(1000,3,2) = -1+0i
+temp[3]2359296i
+temp_4(1000,0,0) = -1+0i
+temp_4(1000,0,1) = -1+0i
+temp_4(1000,0,2) = -1+0i
+temp_4(1000,1,0) = -1+0i
+temp_4(1000,1,1) = -1+0i
+temp_4(1000,1,2) = 1+0i
+temp_4(1000,2,0) = 1+0i
+temp_4(1000,2,1) = -1+0i
+temp_4(1000,2,2) = -1+0i
+temp_4(1000,3,0) = -1+0i
+temp_4(1000,3,1) = 1+0i
+temp_4(1000,3,2) = -1+0i
+temp[4]2359296i
+temp_5(1000,0,0) = 1+0i
+temp_5(1000,0,1) = 1+0i
+temp_5(1000,0,2) = 1+0i
+temp_5(1000,1,0) = 1+0i
+temp_5(1000,1,1) = -1+0i
+temp_5(1000,1,2) = 1+0i
+temp_5(1000,2,0) = -1+0i
+temp_5(1000,2,1) = -1+0i
+temp_5(1000,2,2) = -1+0i
+temp_5(1000,3,0) = 1+0i
+temp_5(1000,3,1) = 1+0i
+temp_5(1000,3,2) = 1+0i
+temp[5]2359296i
+temp_6(1000,0,0) = -1+0i
+temp_6(1000,0,1) = 1+0i
+temp_6(1000,0,2) = -1+0i
+temp_6(1000,1,0) = 1+0i
+temp_6(1000,1,1) = -1+0i
+temp_6(1000,1,2) = 1+0i
+temp_6(1000,2,0) = 1+0i
+temp_6(1000,2,1) = 1+0i
+temp_6(1000,2,2) = -1+0i
+temp_6(1000,3,0) = -1+0i
+temp_6(1000,3,1) = -1+0i
+temp_6(1000,3,2) = -1+0i
+temp[6]2359296i
+temp_7(1000,0,0) = 1+0i
+temp_7(1000,0,1) = 1+0i
+temp_7(1000,0,2) = 1+0i
+temp_7(1000,1,0) = 1+0i
+temp_7(1000,1,1) = -1+0i
+temp_7(1000,1,2) = -1+0i
+temp_7(1000,2,0) = 1+0i
+temp_7(1000,2,1) = -1+0i
+temp_7(1000,2,2) = 1+0i
+temp_7(1000,3,0) = 1+0i
+temp_7(1000,3,1) = -1+0i
+temp_7(1000,3,2) = 1+0i
+temp[7]2359296i
+temp_8(1000,0,0) = -1+0i
+temp_8(1000,0,1) = 1+0i
+temp_8(1000,0,2) = 1+0i
+temp_8(1000,1,0) = -1+0i
+temp_8(1000,1,1) = -1+0i
+temp_8(1000,1,2) = -1+0i
+temp_8(1000,2,0) = 1+0i
+temp_8(1000,2,1) = 1+0i
+temp_8(1000,2,2) = 1+0i
+temp_8(1000,3,0) = -1+0i
+temp_8(1000,3,1) = -1+0i
+temp_8(1000,3,2) = 1+0i
+temp[8]2359296i
+temp_9(1000,0,0) = -1+0i
+temp_9(1000,0,1) = -1+0i
+temp_9(1000,0,2) = -1+0i
+temp_9(1000,1,0) = 1+0i
+temp_9(1000,1,1) = -1+0i
+temp_9(1000,1,2) = -1+0i
+temp_9(1000,2,0) = -1+0i
+temp_9(1000,2,1) = 1+0i
+temp_9(1000,2,2) = -1+0i
+temp_9(1000,3,0) = -1+0i
+temp_9(1000,3,1) = 1+0i
+temp_9(1000,3,2) = 1+0i
+temp[9]2359296i
+Traza = 2359296
+El valor esperado es 196608
+HUTCHINSON_ESTIMATOR_TRACE: ran successfully
+CHROMA: measurements: time= 7.608213 secs
+CHROMA: total time = 9.79029 secs
+CHROMA: ran successfully
+Saving 0 sets of cached parameters to /work/hmonge/compartida/ChromaScriptsKabre/cuda-jit/install/chroma_ghk/bin/profile_64_0.tsv
+Saving 0 sets of cached profiles to /work/hmonge/compartida/ChromaScriptsKabre/cuda-jit/install/chroma_ghk/bin/profile_64_0_async.tsv
+
+               initQuda Total time =     6.319 secs
+                     init     =     6.319 secs ( 99.999%),	 with        2 calls at 3.160e+06 us per call
+        total accounted       =     6.319 secs ( 99.999%)
+        total missing         =     0.000 secs (  0.001%)
+
+                endQuda Total time =     0.749 secs
+
+       initQuda-endQuda Total time =    16.864 secs
+
+                   QUDA Total time =     7.068 secs
+                     init     =     6.319 secs ( 89.409%),	 with        2 calls at 3.160e+06 us per call
+        total accounted       =     6.319 secs ( 89.409%)
+        total missing         =     0.749 secs ( 10.591%)
+
+Device memory used = 0.0 MiB
+Pinned device memory used = 0.0 MiB
+Managed memory used = 0.0 MiB
+Shmem memory used = 0.0 MiB
+Page-locked host memory used = 0.0 MiB
+Total host memory used >= 0.0 MiB
+
+
+        ------------------------
+        -- qdp-jit statistics --
+        ------------------------
+
+Memory cache 
+  lattice objects copied to host memory:   26
+  lattice objects copied to device memory: 22
+
+Pool allocator 
+  peak memory usage:                       2290115200
+Code generator 
+  functions jit-compiled:                  50
+  total time for IR builder:               0.010837 s
+  total time for libm IR linking:          0.097062 s
+  total time for IR passes:                0.017178 s
+  total time for code generation:          0.347087 s
+  total time for dynamic loading:          0.100136 s

@@ -48,9 +48,9 @@ ulimit -c 0
 ##################################
 ##################################
 
-ini=./sumop_kabre.ini.xml
-out=./sumop_kabre.out.xml
-stdout=./sumop_kabre.stdout
+ini=./hutchinson.ini.xml
+out=./hutchinson.out.xml
+stdout=./hutchinson.stdout
 
 RUN="srun  ${PROG} -i $ini -o $out > $stdout 2>&1"
 
