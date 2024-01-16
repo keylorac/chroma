@@ -107,24 +107,24 @@ Finished lattice layout
 CHROMA: Attempt to read gauge field
 CHROMA: Gauge initialization: cfg_type = WEAK_FIELD
 Starting up a weak field config
-CHROMA: Gauge field successfully read: time= 2.865452 secs
-CHROMA: initial plaquette measurement time=1.705695 secs
+CHROMA: Gauge field successfully read: time= 1.422718 secs
+CHROMA: initial plaquette measurement time=0.867201 secs
 CHROMA: There are 3 measurements 
-CHROMA: parsing inline measurements time=0.002014 secs
+CHROMA: parsing inline measurements time=0.00196 secs
 CHROMA: Doing 3 measurements
 QIO_READ_NAMED_OBJECT: object reader
 Attempt to read object name = prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0
 Attempting Parallel IO read
 Single Precision Read
 QIO_read_finished
-Object successfully read: time= 8.243728 secs
+Object successfully read: time= 11.490574 secs
 QIO_READ_NAMED_OBJECT: ran successfully
 QIO_READ_NAMED_OBJECT: object reader
 Attempt to read object name = prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx5ny5nz0nt0
 Attempting Parallel IO read
 Single Precision Read
 QIO_read_finished
-Object successfully read: time= 7.322112 secs
+Object successfully read: time= 8.262693 secs
 QIO_READ_NAMED_OBJECT: ran successfully
 Attempt to initialize the gauge field
 cfs=XX<?xml version="1.0"?>
@@ -142,9 +142,49 @@ forward propagator check = 1250.12427282795
 Forward propagator successfully parsed
 forward propagator check = 1255.89141683362
 Forward propagator successfully parsed
-getTimeInSeconds: either stopwatch not started, or not stopped
-QMP m0,n1@nukwa-06.cnca error: abort: 1
-application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
-slurmstepd: error: *** STEP 107777.0 ON nukwa-06.cnca CANCELLED AT 2023-09-12T11:53:13 ***
-srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
-finished calculating SUM_PROPS  time= srun: error: nukwa-06.cnca: task 0: Killed
+SUM_PROPS: ran successfully
+CHROMA: measurements: time= 21.019134 secs
+CHROMA: total time = 27.537039 secs
+CHROMA: ran successfully
+Saving 0 sets of cached parameters to /work/karley/ChromaScriptsKabre/cuda-jit/install/chroma/bin/profile_64_0.tsv
+Saving 0 sets of cached profiles to /work/karley/ChromaScriptsKabre/cuda-jit/install/chroma/bin/profile_64_0_async.tsv
+
+               initQuda Total time =     5.810 secs
+                     init     =     5.810 secs ( 99.998%),	 with        2 calls at 2.905e+06 us per call
+        total accounted       =     5.810 secs ( 99.998%)
+        total missing         =     0.000 secs (  0.002%)
+
+                endQuda Total time =     2.709 secs
+
+       initQuda-endQuda Total time =    36.064 secs
+
+                   QUDA Total time =     8.520 secs
+                     init     =     5.810 secs ( 68.198%),	 with        2 calls at 2.905e+06 us per call
+        total accounted       =     5.810 secs ( 68.198%)
+        total missing         =     2.709 secs ( 31.802%)
+
+Device memory used = 0.0 MiB
+Pinned device memory used = 0.0 MiB
+Managed memory used = 0.0 MiB
+Shmem memory used = 0.0 MiB
+Page-locked host memory used = 0.0 MiB
+Total host memory used >= 0.0 MiB
+
+
+        ------------------------
+        -- qdp-jit statistics --
+        ------------------------
+
+Memory cache 
+  lattice objects copied to host memory:   6
+  lattice objects copied to device memory: 2
+
+Pool allocator 
+  peak memory usage:                       2181572480
+Code generator 
+  functions jit-compiled:                  40
+  total time for IR builder:               0.01924 s
+  total time for libm IR linking:          0.271164 s
+  total time for IR passes:                0.033309 s
+  total time for code generation:          0.628943 s
+  total time for dynamic loading:          4.810155 s

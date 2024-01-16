@@ -83,7 +83,7 @@ una constante que nos dan un propagador resultante -->
       <qdp>0.1</qdp>
       <basePrecision>64</basePrecision>
     </code_version>
-    <run_date>12 Sep 23 11:52:51 CST</run_date>
+    <run_date>30 Oct 23 11:54:54 CST</run_date>
     <Setgeom>
       <latt_size>16 16 16 48</latt_size>
       <logical_size>1 1 1 1</logical_size>
@@ -156,7 +156,7 @@ una constante que nos dan un propagador resultante -->
             <qdp>0.1</qdp>
             <basePrecision>64</basePrecision>
           </code_version>
-          <run_date>12 Sep 23 11:53:11 CST</run_date>
+          <run_date>30 Oct 23 11:55:16 CST</run_date>
           <Setgeom>
             <latt_size>16 16 16 48</latt_size>
             <logical_size>1 1 1 1</logical_size>
@@ -345,3 +345,11 @@ una constante que nos dan un propagador resultante -->
         </MILC>
       </Config_info>
     </Propagator>
+
+          </PropRecordXML>
+          <PropCheck>1255.89141683362 1590.8314576802 1827.91788699464 1888.2745343474 1913.1819682014 1934.9468765063 1927.00891726334 1921.84769903036 1910.60303605969 1918.14452431245 1946.79502136832 1949.38783919806 1932.75465843475 1929.3257738982 1930.25827361669 1934.62124245835 1936.93231198753 1925.4941126329 1914.21568831931 1897.07703170323 1891.42184163019 1895.3985555414 1916.9338766781 1943.65931049161 1954.92662600792 1989.14488060645 2051.18507191048 1998.25749414726 1947.77421501905 1932.05768156001 1927.56809905756 1919.45648658431 1913.83975108687 1915.32820242839 1919.69343649707 1912.52386528048 1902.03787248853 1899.39842337858 1911.91462558509 1932.19805131315 1962.514442984 1989.1307283417 1977.60926205015 1954.27820515897 1923.80169812152 1854.46069299666 1629.74952885696 1279.63311029146</PropCheck>
+        </ForwardProp>
+      </SUM_PROPS>
+    </elem>
+  </InlineObservables>
+</chroma>

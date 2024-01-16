@@ -11,7 +11,6 @@
 #include "meas/inline/smear/inline_smear_aggregate.h"
 #include "meas/inline/io/inline_io_aggregate.h"
 #include "meas/inline/pbp/inline_pbp_aggregate.h"
-
 #include "meas/inline/hadron_s/inline_hadron_aggregate_s.h"
 
 namespace Chroma
@@ -40,8 +39,7 @@ namespace Chroma
 	success &= InlineSmearAggregateEnv::registerAll();
 	success &= InlineIOAggregateEnv::registerAll();
 	success &= InlinePsiBarPsiAggregateEnv::registerAll();
-
-	success &= InlineStaggeredHadronAggregateEnv::registerAll();
+        success &= InlineStaggeredHadronAggregateEnv::registerAll();
 
 	registered = true;
       }

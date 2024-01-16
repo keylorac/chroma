@@ -1,36 +1,65 @@
 /*! \file
- * \brief Inline construction of SUM of props
+ * \brief Inline construction of Hutchinson_trace_estimator
  *
- * SUM of props
+ * Hutchinson_trace_estimator
  */
 #include <cmath>    
-#include "meas/inline/hadron/inline_sumprops_w.h"
+#include "meas/inline/hadron/inline_hutchinson_estimator_trace.h"
 #include "meas/inline/abs_inline_measurement_factory.h"
 #include "meas/glue/mesplq.h"
 #include "util/ft/sftmom.h"
 // #include "meas/hadron/BuildingBlocks_w.h"
 #include "util/info/proginfo.h"
 #include "meas/inline/make_xml_file.h"
-
 #include "meas/inline/io/named_objmap.h"
 #include "actions/ferm/fermstates/ferm_createstate_factory_w.h"
 #include "actions/ferm/fermstates/ferm_createstate_aggregate_w.h"
+#include "chromabase.h"
+
+
+  void z2_src_t(QDP::LatticeFermion & a)
+  {
+
+    a = zero ; 
+    LatticeReal rnd ;
+    LatticeReal ar ,ai ;
+    LatticeColorVector colorvec = zero;
+
+    for(int spin_index= 0 ; spin_index < Ns ; ++spin_index)
+      for(int color_index= 0 ; color_index < Nc ; ++color_index)
+      {
+    random(rnd) ; 
+    ar = where( rnd > 0.5 , LatticeReal(1) , LatticeReal(-1) );
+    random(rnd) ; 
+    ai = where( rnd > 0.5 , LatticeReal(1) , LatticeReal(-1) );
+    LatticeComplex c = cmplx(ar,0) ;
+
+    colorvec = peekSpin(a,spin_index);
+
+    pokeSpin(a,pokeColor(colorvec,c,color_index),spin_index);
+      }
+
+  }
+
 namespace Chroma 
 { 
-  namespace InlineSum_PropsEnv 
+  namespace InlineHutchinsonTraceEstimatorEnv 
   { 
     namespace
     {
       AbsInlineMeasurement* createMeasurement(XMLReader& xml_in, 
 					      const std::string& path) 
       {
-	return new InlineSum_props(InlineSum_PropsParams(xml_in, path));
+	return new InlineHutchinson_Trace_Estimator(InlineHutchinsonTraceEstimatorParams(xml_in, path));
       }
       //! Local registration flag
       bool registered = false;
     }
-    const std::string name = "SUM_PROPS";
+  
+    const std::string name = "HUTCHINSON_ESTIMATOR_TRACE";
+    //const std::string name = "SET_RNG"; esto por si quisieramos leer y guardar el seed random
     //! Register all the factories
+
     bool registerAll() 
     {
       bool success = true; 
@@ -45,8 +74,8 @@ namespace Chroma
   }
 
  
-  //! Param input
-  void read(XMLReader& xml, const std::string& path, InlineSum_PropsParams::Param_t& input)
+  //! Param input NO APLICA EN ESTE CASO
+  void read(XMLReader& xml, const std::string& path, InlineHutchinsonTraceEstimatorParams::Param_t& input)
   {
     XMLReader paramtop(xml, path);
     int version;
@@ -62,51 +91,51 @@ namespace Chroma
     case 1:
       break;
     default :
-      QDPIO::cerr << InlineSum_PropsEnv::name << ": input parameter version " 
+      QDPIO::cerr << InlineHutchinsonTraceEstimatorEnv::name << ": input parameter version " 
 		  << version << " unsupported." << std::endl;
       QDP_abort(1);
     }
     
-      read(paramtop, "cons_1", input.cons_1);
-      read(paramtop, "cons_2", input.cons_2);
-    //read(paramtop, "links_max", input.links_max);
-    //read(paramtop, "file_name", input.file_name);
-   // read(paramtop,"cfg",input.cfg);
+    read(paramtop, "cons_1", input.cons_1);
+    read(paramtop, "cons_2", input.cons_2);
+    read(paramtop, "links_max", input.links_max);
+    read(paramtop, "file_name", input.file_name);
+    //read(paramtop,"cfg",input.cfg);
   }
   //! Param write
-  void write(XMLWriter& xml, const std::string& path, const InlineSum_PropsParams::Param_t& input)
+  void write(XMLWriter& xml, const std::string& path, const InlineHutchinsonTraceEstimatorParams::Param_t& input)
   {
     push(xml, path);
     int version = 1;
     write(xml, "version", version);
-    //write(xml, "links_max", input.links_max);
+    write(xml, "links_max", input.links_max);
     write(xml, "cons_1", input.cons_1);
     write(xml, "cons_1", input.cons_2);    
     xml << input.cfs.xml;
     pop(xml);
   }
-  //! Propagator input
-  void read(XMLReader& xml, const std::string& path, InlineSum_PropsParams::NamedObject_t& input)
+  //! Vector input
+  void read(XMLReader& xml, const std::string& path, InlineHutchinsonTraceEstimatorParams::NamedObject_t& input)
   {
     XMLReader inputtop(xml, path);
     read(inputtop, "gauge_id", input.gauge_id);
-    read(inputtop, "prop_1", input.prop_1); //Agregamos el id del propagador 1
-    read(inputtop, "prop_2", input.prop_2); //Agregamos el id del propagador 2
-    read(inputtop, "prop_r", input.prop_r); //Agregamos el id del propagador resultante
+    //read(inputtop, "vect_1", input.vect_1); //Agregamos el id del vector
+    //read(inputtop, "vect_2", input.vect_2); //Agregamos el id del los vector transpuesto
+    //read(inputtop, "vect_r", input.vect_r); //Agregamos el id del resultado de la estimacion de la traza resultante
   }
-  //! Propagator output
-  void write(XMLWriter& xml, const std::string& path, const InlineSum_PropsParams::NamedObject_t& input)
+  //! Vector output
+  void write(XMLWriter& xml, const std::string& path, const InlineHutchinsonTraceEstimatorParams::NamedObject_t& input)
   {
     push(xml, path);
     write(xml, "gauge_id", input.gauge_id);
-    write(xml, "prop_1", input.prop_1);
-    write(xml, "prop_2", input.prop_2);
-    write(xml, "prop_r", input.prop_r);
+    //write(xml, "vect_1", input.vect_1);
+    //write(xml, "vect_2", input.vect_2);
+    //write(xml, "vect_r", input.vect_r);
     pop(xml);
   }
   // Param stuff
-  InlineSum_PropsParams::InlineSum_PropsParams() {frequency = 0;}
-  InlineSum_PropsParams::InlineSum_PropsParams(XMLReader& xml_in, const std::string& path) 
+  InlineHutchinsonTraceEstimatorParams::InlineHutchinsonTraceEstimatorParams() {frequency = 0;}
+  InlineHutchinsonTraceEstimatorParams::InlineHutchinsonTraceEstimatorParams(XMLReader& xml_in, const std::string& path) 
   {
     try 
     {
@@ -116,7 +145,7 @@ namespace Chroma
       else
 	frequency = 1;
       // Read program parameters
-      read(paramtop, "Param", param);
+      //read(paramtop, "Param", param);
       // Read in the output propagator/source configuration info
       read(paramtop, "NamedObject", named_obj);
       // Possible alternate XML file pattern
@@ -132,11 +161,11 @@ namespace Chroma
     }
   }
   void
-  InlineSum_PropsParams::write(XMLWriter& xml_out, const std::string& path) 
+  InlineHutchinsonTraceEstimatorParams::write(XMLWriter& xml_out, const std::string& path) 
   {
     push(xml_out, path);
     
-    Chroma::write(xml_out, "Param", param); 
+    //Chroma::write(xml_out, "Param", param); 
     Chroma::write(xml_out, "NamedObject", named_obj);
     QDP::write(xml_out, "xml_file", xml_file);
     pop(xml_out);
@@ -144,14 +173,14 @@ namespace Chroma
  
   // Function call
   void 
-  InlineSum_props::operator()(unsigned long update_no,
+  InlineHutchinson_Trace_Estimator::operator()(unsigned long update_no,
 				   XMLWriter& xml_out) 
   {
     // If xml file not empty, then use alternate
     if (params.xml_file != "")
     {
       std::string xml_file = makeXMLFileName(params.xml_file, update_no);
-      push(xml_out, "SUM_PROPS");
+      push(xml_out, "HUTCHINSON_TRACE_ESTIMATOR");
       write(xml_out, "update_no", update_no);
       write(xml_out, "xml_file", xml_file);
       pop(xml_out);
@@ -165,14 +194,14 @@ namespace Chroma
   }
   // Function call
   void 
-  InlineSum_props::func(unsigned long update_no,
+  InlineHutchinson_Trace_Estimator::func(unsigned long update_no,
 			     XMLWriter& XmlOut) 
   {
     START_CODE();
     StopWatch snoop;
     snoop.reset();
     snoop.start();
-    push(XmlOut, "SUM_PROPS");
+    push(XmlOut, "HUTCHINSON_TRACE_ESTIMATOR");
     write(XmlOut, "update_no", update_no);
     //#################################################################################//
     // XML output
@@ -211,19 +240,19 @@ namespace Chroma
     }
     catch( std::bad_cast ) 
     {
-      QDPIO::cerr << InlineSum_PropsEnv::name << ": caught dynamic cast error" 
+      QDPIO::cerr << InlineHutchinsonTraceEstimatorEnv::name << ": caught dynamic cast error" 
 		  << std::endl;
       QDP_abort(1);
     }
     catch (const std::string& e) 
     {
-      QDPIO::cerr << InlineSum_PropsEnv::name << ": std::map call failed: " << e 
+      QDPIO::cerr << InlineHutchinsonTraceEstimatorEnv::name << ": std::map call failed: " << e 
 		  << std::endl;
       QDP_abort(1);
     }
     catch( ... )
     {
-      QDPIO::cerr << InlineSum_PropsEnv::name << ": caught generic exception "
+      QDPIO::cerr << InlineHutchinsonTraceEstimatorEnv::name << ": caught generic exception "
 		  << std::endl;
       QDP_abort(1);
     }
@@ -285,13 +314,13 @@ namespace Chroma
     }
     catch( std::bad_cast ) 
     {
-      QDPIO::cerr << InlineSum_PropsEnv::name << ": caught dynamic cast error" 
+      QDPIO::cerr << InlineHutchinsonTraceEstimatorEnv::name << ": caught dynamic cast error" 
 		  << std::endl;
       QDP_abort(1);
     }
     catch (const std::string& e) 
     {
-      QDPIO::cerr << InlineSum_PropsEnv::name << ": forward prop: error message: " << e 
+      QDPIO::cerr << InlineHutchinsonTraceEstimatorEnv::name << ": forward prop: error message: " << e 
 		  << std::endl;
       QDP_abort(1);
     }
@@ -327,13 +356,13 @@ namespace Chroma
     }
     catch( std::bad_cast ) 
     {
-      QDPIO::cerr << InlineSum_PropsEnv::name << ": caught dynamic cast error" 
+      QDPIO::cerr << InlineHutchinsonTraceEstimatorEnv::name << ": caught dynamic cast error" 
 		  << std::endl;
       QDP_abort(1);
     }
     catch (const std::string& e) 
     {
-      QDPIO::cerr << InlineSum_PropsEnv::name << ": forward prop: error message: " << e 
+      QDPIO::cerr << InlineHutchinsonTraceEstimatorEnv::name << ": forward prop: error message: " << e 
 		  << std::endl;
       QDP_abort(1);
     }
@@ -347,7 +376,7 @@ namespace Chroma
     swatch.reset();
     
     XMLBufferWriter file_xml;
-    push(file_xml, "SUM_PROPS");
+    push(file_xml, "HUTCHINSON_TRACE_ESTIMATOR");
     write(file_xml, "Param", params.param);
     write(file_xml, "Config", gauge_xml);
     pop(file_xml);
@@ -358,58 +387,94 @@ namespace Chroma
     //write(prop_xml,"mom",mom);
     //write(prop_xml,"origin",t_src);
     //write(prop_xml,"t_dir",t_dir);
-    pop(prop_xml) ;
+    pop(prop_xml);
+    
+    Seed ran_seed;
+    QDP::RNG::savern(ran_seed);
 
+    LatticeReal rnd1;
+    random(rnd1); //Salva un random en cada punto del Lattice
 
+    
+    //restore the see
+    QDP::RNG::setrn(ran_seed);
 
-    //Seed ran_seed;
-    //QDP::RNG::savern(ran_seed);
-
-    //LatticeReal rnd1;
-    //random(rnd1); //Salva un random en cada punto del Lattice
-
-
-    //restore the seed
-    //QDP::RNG::setrn(ran_seed);
-
-    //LatticeHalfFermion entrada;
-    //LatticeHalfFermion salida=0;
-       //multi1d <LatticeComplex> temp;
-       //temp.resize(100);
-
-       //for(int i=0; i<5; i++) // i in range(0,5)
-          //salida=random(-1,1)*entrada;
-
-          //for(int s1=0; s1<4; s1++){  // s1 in range(0,4) recorrido por los sites
-                //for(int c1=0; c1<3; c1++){  c1 in range(0,3) //recorrido por los co$                    salida.elem(s1).elem(c1).elem().real()=random(rnd1);
-                    //salida.elem(s1).elem(c1).elem().imag()=random(rnd1);
-
-                // }
-          //}
-
-          //entrada = salida;
-          //salida= Dirac*salida;//
-          //temp[i] += dagger(entrada)*entrada;
-          //temp[i] += dagger(entrada)*salida;
-
-      //complex acumulado=0;
-      //for(int i=0; i<100; i++){ // i in range(0,100):
-       // acumulado+=temp[i];
-      //}
-      //acumulado/=100;
-
-      //int entradasDiagonal = QDP::Layout::vol()*12;
-      //esperado=acumulado/entradasDiagonal; //Este deberia ser 1 real
-      //cout << "Valor esperado es: " << esperado;
-
-/*
-    LatticeHalfFermion entrada;
-    LatticeHalfFermion salida=0;
-
-    multi1d <complex> temp;
+    LatticeFermion entrada;
+    LatticeFermion salida;
+   
+    multi1d <LatticeComplex> temp;
     temp.resize(100);
- 
-// *  for i in range(0,100):
+    
+       for(int i=0; i<100; i++){ // i in range(0,100)
+          //salida=random(-1,1)*entrada;
+          z2_src_t(entrada); 
+          salida=entrada;
+          temp[i] += innerProduct(entrada,salida);       
+       }
+       
+      Complex acumulado=0;
+      
+      for(int i=0; i<100; i++){ // i in range(0,100):
+        //QDPInternal::globalSum(temp[i]); //the globalSum function make the reduction and also the sum of the rest of the system
+        acumulado+=sum(temp[i]);
+      }
+      acumulado/=100;
+        
+      int entradasDiagonal = QDP::Layout::vol()*12;
+      Complex esperado=acumulado/entradasDiagonal; //Este deberia ser 1 real
+
+      QDPIO::cout << "El valor esperado es " << esperado.elem().elem().elem().real()<<"\n";
+      
+// x = ( a==b ? c : d ); operador ternario
+
+
+
+//PRODUCTO DE MATRICES RANDOM C++
+//#include <iostream> para poder usar numeros aleatorios
+//#include <sdtlib.h> para poder usar numeros aleatorios
+//using namespace std; para poder usar funciones cout y cin
+//int main (int argc, char** argv){
+//	int filas = 3, columnas = 3; variables de tipo entero inicializadas en 3 para especificar el tamaño de las matrices	
+//	int matrizA[filas][columnas];
+//	int matrizB[filas][columnas];
+//	int matrizR[filas][columnas];
+//	int matrizT[columnas][filas]; cambiamos filas por columnas
+//	int esperado;
+//	srand(time(NULL)); funcion para poder utilizar el random en c++
+//
+//	Llenar matrices mediante ciclos
+//	for(int i=0; i<filas; i++){            Recorremos filas
+//		for(int j=0; j<columnas; j++){ Recorremos columnas
+//			matrizA[i][j] = rand()%2; la funcion rand()%2 lo que hace es guardar números aleatorios entre 0 y 1
+//			//matrizB[i][j] = rand()%2;		
+//		}
+//	}
+//	Matriz transpuesta
+//	for(int i=0; i<filas; i++){
+//		for(int j=0; j<columnas; j++){
+//			matrizT[j][i] = matrizA[i][j];
+//		}
+//	}
+//	Producto de matriz por su transpuesta
+//	for(int i=0; i<filas; i++){
+//		for(int j=0; j<columnas; j++){
+//			matrizR[i][j] = 0;
+//			for(int k=0; k<filas; k++){
+//				matrizR[i][j] += matrizT[i][k] * matrizA[k][j];
+//			}
+//		}
+//	
+//	}
+//	return 0;
+//}
+
+
+// * LatticeHalfFermion entrada;
+// * LatticeHalfFermion salida=0;
+// *   multi1d <LatticeComplex> temp;
+// *   temp.resize(100);
+// *
+// *   for i in range(0,100)
 // *      //salida=random(-1,1)*entrada;    
 // *
 // *      for s1 in range(0,4)
@@ -431,8 +496,6 @@ namespace Chroma
 // *  int entradasDiagonal = QDP::Layout::vol()*12;
 // *  
 // *  esperado=acumulado/entradasDiagonal; //Este deberia ser 1 real
-// *
-// *  */
 
 
 
@@ -440,17 +503,31 @@ namespace Chroma
    
      //end ale
     //close(qio_file);
-    //QDPIO::cout << "finished calculating SUM_PROPS"
+    //QDPIO::cout << "finished calculating HUTCHINSON_ESTIMATOR_TRACE"
 	//	<< "  time= "
 	//	<< swatch.getTimeInSeconds() 
 	//	<< " secs" << std::endl;
-    pop(XmlOut);   // SUM_PROPS
+    pop(XmlOut);   // HUTCHINSON_ESTIMATOR_TRACE
     //snoop.stop();
-    //QDPIO::cout << InlineSum_PropsEnv::name << ": total time = "
+    //QDPIO::cout << InlineHutchinsonEstimatorTraceEnv::name << ": total time = "
 	//	<< snoop.getTimeInSeconds() 
 	//	<< " secs" << std::endl;
 
-    QDPIO::cout << InlineSum_PropsEnv::name << ": ran successfully" << std::endl;
+    QDPIO::cout << InlineHutchinsonTraceEstimatorEnv::name << ": ran successfully" << std::endl;
     END_CODE();
   } 
 }
+
+
+//SIMPLE ESTIMATION OF THE TRACE OF SQUARE MATRIX I
+//We can estimate the trace of Square Matrix A with num?queries many matrix/vector products.
+//Implements Hutchinson's estimator. Random sign vectors are used.
+//Generate a random sign matrix
+//function trace_est = simple_hutchinson(A, num_queries)
+//	S = 2*randi(2, size(A,1), num_queries)-3;
+//	
+// 	trace_est = trace(S*(A*S))/ num_queries;
+//end
+
+
+

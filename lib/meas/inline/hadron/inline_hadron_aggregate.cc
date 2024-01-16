@@ -51,6 +51,7 @@
 //#include "meas/inline/hadron/inline_multipole_w.h"
 #include "meas/inline/hadron/inline_npr_vertex_w.h"
 #include "meas/inline/hadron/inline_npr_w.h"
+#include "meas/inline/hadron/inline_hutchinson_estimator_trace.h"
 #include "meas/inline/hadron/inline_sumprops_w.h"
 #include "meas/inline/hadron/inline_distillution_noise.h"
 #include "meas/inline/hadron/inline_prop_distillution_w.h"
@@ -163,7 +164,8 @@ namespace Chroma
 //      success &= InlineMultipoleEnv::registerAll();  // not being used
 	success &= InlineNprVertexEnv::registerAll();
 	success &= InlineNprEnv::registerAll();
-    success &= InlineSum_PropsEnv::registerAll();
+        success &= InlineSum_PropsEnv::registerAll();
+        success &= InlineHutchinsonTraceEstimatorEnv::registerAll();
 	success &= InlineDistillutionNoiseEnv::registerAll();
 	success &= InlinePropDistillutionEnv::registerAll();
 	success &= InlinePropDistillationEnv::registerAll();

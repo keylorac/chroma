@@ -3,8 +3,8 @@
  *
  * SUM of props
  */
-#include <cmath>    
-#include "meas/inline/hadron/inline_sumprops_w.h"
+#include <cmath>
+#include "meas/inline/hadron/inline_hutchinson_estimator_trace.h"
 #include "meas/inline/abs_inline_measurement_factory.h"
 #include "meas/glue/mesplq.h"
 #include "util/ft/sftmom.h"
@@ -15,21 +15,46 @@
 #include "meas/inline/io/named_objmap.h"
 #include "actions/ferm/fermstates/ferm_createstate_factory_w.h"
 #include "actions/ferm/fermstates/ferm_createstate_aggregate_w.h"
+
+  void z2_src_t(QDP::LatticeFermion & a)
+  {
+
+    a = zero ;
+    LatticeReal rnd ;
+    LatticeReal ar ,ai ;
+    LatticeColorVector colorvec = zero;
+
+    for(int spin_index= 0 ; spin_index < Ns ; ++spin_index)
+      for(int color_index= 0 ; color_index < Nc ; ++color_index)
+      {
+    random(rnd) ;
+    ar = where( rnd > 0.5 , LatticeReal(1) , LatticeReal(-1) );
+    random(rnd) ;
+    ai = where( rnd > 0.5 , LatticeReal(1) , LatticeReal(-1) );
+    LatticeComplex c = cmplx(ar,0) ;
+
+    colorvec = peekSpin(a,spin_index);
+
+    pokeSpin(a,pokeColor(colorvec,c,color_index),spin_index);
+      }
+
+  }
+
 namespace Chroma 
 { 
-  namespace InlineSum_PropsEnv 
+  namespace InlineHutchinsonTraceEstimatorEnv 
   { 
     namespace
     {
       AbsInlineMeasurement* createMeasurement(XMLReader& xml_in, 
 					      const std::string& path) 
       {
-	return new InlineSum_props(InlineSum_PropsParams(xml_in, path));
+	return new InlineHutchinson_Trace_Estimator(InlineHutchinsonTraceEstimatorParams(xml_in, path));
       }
       //! Local registration flag
       bool registered = false;
     }
-    const std::string name = "SUM_PROPS";
+    const std::string name = "HUTCHINSON_ESTIMATOR_TRACE";
     //! Register all the factories
     bool registerAll() 
     {
@@ -46,7 +71,7 @@ namespace Chroma
 
  
   //! Param input
-  void read(XMLReader& xml, const std::string& path, InlineSum_PropsParams::Param_t& input)
+  void read(XMLReader& xml, const std::string& path, InlineHutchinsonTraceEstimatorParams::Param_t& input)
   {
     XMLReader paramtop(xml, path);
     int version;
@@ -62,7 +87,7 @@ namespace Chroma
     case 1:
       break;
     default :
-      QDPIO::cerr << InlineSum_PropsEnv::name << ": input parameter version " 
+      QDPIO::cerr << InlineHutchinsonTraceEstimatorEnv::name << ": input parameter version " 
 		  << version << " unsupported." << std::endl;
       QDP_abort(1);
     }
@@ -74,7 +99,7 @@ namespace Chroma
    // read(paramtop,"cfg",input.cfg);
   }
   //! Param write
-  void write(XMLWriter& xml, const std::string& path, const InlineSum_PropsParams::Param_t& input)
+  void write(XMLWriter& xml, const std::string& path, const InlineHutchinsonTraceEstimatorParams::Param_t& input)
   {
     push(xml, path);
     int version = 1;
@@ -86,7 +111,7 @@ namespace Chroma
     pop(xml);
   }
   //! Propagator input
-  void read(XMLReader& xml, const std::string& path, InlineSum_PropsParams::NamedObject_t& input)
+  void read(XMLReader& xml, const std::string& path, InlineHutchinsonTraceEstimatorParams::NamedObject_t& input)
   {
     XMLReader inputtop(xml, path);
     read(inputtop, "gauge_id", input.gauge_id);
@@ -95,7 +120,7 @@ namespace Chroma
     read(inputtop, "prop_r", input.prop_r); //Agregamos el id del propagador resultante
   }
   //! Propagator output
-  void write(XMLWriter& xml, const std::string& path, const InlineSum_PropsParams::NamedObject_t& input)
+  void write(XMLWriter& xml, const std::string& path, const InlineHutchinsonTraceEstimatorParams::NamedObject_t& input)
   {
     push(xml, path);
     write(xml, "gauge_id", input.gauge_id);
@@ -105,8 +130,8 @@ namespace Chroma
     pop(xml);
   }
   // Param stuff
-  InlineSum_PropsParams::InlineSum_PropsParams() {frequency = 0;}
-  InlineSum_PropsParams::InlineSum_PropsParams(XMLReader& xml_in, const std::string& path) 
+  InlineHutchinsonTraceEstimatorParams::InlineHutchinsonTraceEstimatorParams() {frequency = 0;}
+  InlineHutchinsonTraceEstimatorParams::InlineHutchinsonTraceEstimatorParams(XMLReader& xml_in, const std::string& path) 
   {
     try 
     {
@@ -132,7 +157,7 @@ namespace Chroma
     }
   }
   void
-  InlineSum_PropsParams::write(XMLWriter& xml_out, const std::string& path) 
+  InlineHutchinsonTraceEstimatorParams::write(XMLWriter& xml_out, const std::string& path) 
   {
     push(xml_out, path);
     
@@ -144,14 +169,14 @@ namespace Chroma
  
   // Function call
   void 
-  InlineSum_props::operator()(unsigned long update_no,
+  InlineHutchinson_Trace_Estimator::operator()(unsigned long update_no,
 				   XMLWriter& xml_out) 
   {
     // If xml file not empty, then use alternate
     if (params.xml_file != "")
     {
       std::string xml_file = makeXMLFileName(params.xml_file, update_no);
-      push(xml_out, "SUM_PROPS");
+      push(xml_out, "HUTCHINSON_ESTIMATOR_TRACE");
       write(xml_out, "update_no", update_no);
       write(xml_out, "xml_file", xml_file);
       pop(xml_out);
@@ -165,14 +190,14 @@ namespace Chroma
   }
   // Function call
   void 
-  InlineSum_props::func(unsigned long update_no,
+  InlineHutchinson_Trace_Estimator::func(unsigned long update_no,
 			     XMLWriter& XmlOut) 
   {
     START_CODE();
     StopWatch snoop;
     snoop.reset();
     snoop.start();
-    push(XmlOut, "SUM_PROPS");
+    push(XmlOut, "HUTCHINSON_ESTIMATOR_TRACE");
     write(XmlOut, "update_no", update_no);
     //#################################################################################//
     // XML output
@@ -211,19 +236,19 @@ namespace Chroma
     }
     catch( std::bad_cast ) 
     {
-      QDPIO::cerr << InlineSum_PropsEnv::name << ": caught dynamic cast error" 
+      QDPIO::cerr << InlineHutchinsonTraceEstimatorEnv::name << ": caught dynamic cast error" 
 		  << std::endl;
       QDP_abort(1);
     }
     catch (const std::string& e) 
     {
-      QDPIO::cerr << InlineSum_PropsEnv::name << ": std::map call failed: " << e 
+      QDPIO::cerr << InlineHutchinsonTraceEstimatorEnv::name << ": std::map call failed: " << e 
 		  << std::endl;
       QDP_abort(1);
     }
     catch( ... )
     {
-      QDPIO::cerr << InlineSum_PropsEnv::name << ": caught generic exception "
+      QDPIO::cerr << InlineHutchinsonTraceEstimatorEnv::name << ": caught generic exception "
 		  << std::endl;
       QDP_abort(1);
     }
@@ -285,13 +310,13 @@ namespace Chroma
     }
     catch( std::bad_cast ) 
     {
-      QDPIO::cerr << InlineSum_PropsEnv::name << ": caught dynamic cast error" 
+      QDPIO::cerr << InlineHutchinsonTraceEstimatorEnv::name << ": caught dynamic cast error" 
 		  << std::endl;
       QDP_abort(1);
     }
     catch (const std::string& e) 
     {
-      QDPIO::cerr << InlineSum_PropsEnv::name << ": forward prop: error message: " << e 
+      QDPIO::cerr << InlineHutchinsonTraceEstimatorEnv::name << ": forward prop: error message: " << e 
 		  << std::endl;
       QDP_abort(1);
     }
@@ -327,13 +352,13 @@ namespace Chroma
     }
     catch( std::bad_cast ) 
     {
-      QDPIO::cerr << InlineSum_PropsEnv::name << ": caught dynamic cast error" 
+      QDPIO::cerr << InlineHutchinsonTraceEstimatorEnv::name << ": caught dynamic cast error" 
 		  << std::endl;
       QDP_abort(1);
     }
     catch (const std::string& e) 
     {
-      QDPIO::cerr << InlineSum_PropsEnv::name << ": forward prop: error message: " << e 
+      QDPIO::cerr << InlineHutchinsonTraceEstimatorEnv::name << ": forward prop: error message: " << e 
 		  << std::endl;
       QDP_abort(1);
     }
@@ -347,7 +372,7 @@ namespace Chroma
     swatch.reset();
     
     XMLBufferWriter file_xml;
-    push(file_xml, "SUM_PROPS");
+    push(file_xml, "HUTCHINSON_ESTIMATOR_TRACE");
     write(file_xml, "Param", params.param);
     write(file_xml, "Config", gauge_xml);
     pop(file_xml);
@@ -360,7 +385,52 @@ namespace Chroma
     //write(prop_xml,"t_dir",t_dir);
     pop(prop_xml) ;
 
+    Seed ran_seed;
+    QDP::RNG::savern(ran_seed);
 
+    LatticeReal rnd1;
+    random(rnd1); //Salva un random en cada punto del Lattice
+
+
+    //restore the see
+    QDP::RNG::setrn(ran_seed);
+
+    LatticeFermion entrada;
+    LatticeFermion salida;
+
+    multi1d <LatticeComplex> temp;
+
+
+    int nvec=10;
+    temp.resize(nvec);
+
+       for(int i=0; i<nvec; i++){ // i in range(0,100)
+          z2_src_t(entrada);   //crea el z2 noise vector
+          salida=entrada;      //copia
+
+          for(int s=0; s<4;s++){
+            for(int c=0; c<3;c++){
+              QDPIO::cout << "temp_"<<i<<"(1000,"<<s<<","<<c<<") = " << entrada.elem(1000).elem(s).elem(c).real()<<"+";
+              QDPIO::cout << entrada.elem(1000).elem(s).elem(c).imag()<<"i\n";
+            }
+          }
+          temp[i] = innerProduct(entrada,salida); //producto punto
+          QDPIO::cout << "temp["<<i<<"]"<<temp[i].elem(1000).elem().elem().real()<<"i\n";
+       }
+     
+      Complex acumulado=0;
+
+      for(int i=0; i<nvec; i++){ 
+        acumulado+=sum(temp[i]);
+      }
+      acumulado/=nvec;
+
+      int entradasDiagonal = QDP::Layout::vol()*12;
+      Complex esperado=acumulado/entradasDiagonal; 
+
+
+      QDPIO::cout << "Traza = " << entradasDiagonal <<"\n";
+      QDPIO::cout << "El valor esperado es " << esperado.elem().elem().elem().real()<<"\n";
 
     //Seed ran_seed;
     //QDP::RNG::savern(ran_seed);
@@ -440,17 +510,17 @@ namespace Chroma
    
      //end ale
     //close(qio_file);
-    //QDPIO::cout << "finished calculating SUM_PROPS"
+    //QDPIO::cout << "finished calculating HUTCHINSON_ESTIMATOR_TRACE"
 	//	<< "  time= "
 	//	<< swatch.getTimeInSeconds() 
 	//	<< " secs" << std::endl;
-    pop(XmlOut);   // SUM_PROPS
+    pop(XmlOut);   // HUTCHINSON_ESTIMATOR_TRACE
     //snoop.stop();
-    //QDPIO::cout << InlineSum_PropsEnv::name << ": total time = "
+    //QDPIO::cout << InlineHutchinsonTraceEstimatorEnv::name << ": total time = "
 	//	<< snoop.getTimeInSeconds() 
 	//	<< " secs" << std::endl;
 
-    QDPIO::cout << InlineSum_PropsEnv::name << ": ran successfully" << std::endl;
+    QDPIO::cout << InlineHutchinsonTraceEstimatorEnv::name << ": ran successfully" << std::endl;
     END_CODE();
   } 
 }
