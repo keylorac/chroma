@@ -1,18 +1,7 @@
-no change     /opt/python/miniconda3/condabin/conda
-no change     /opt/python/miniconda3/bin/conda
-no change     /opt/python/miniconda3/bin/conda-env
-no change     /opt/python/miniconda3/bin/activate
-no change     /opt/python/miniconda3/bin/deactivate
-no change     /opt/python/miniconda3/etc/profile.d/conda.sh
-no change     /opt/python/miniconda3/etc/fish/conf.d/conda.fish
-no change     /opt/python/miniconda3/shell/condabin/Conda.psm1
-no change     /opt/python/miniconda3/shell/condabin/conda-hook.ps1
-no change     /opt/python/miniconda3/lib/python3.9/site-packages/xontrib/conda.xsh
-no change     /opt/python/miniconda3/etc/profile.d/conda.csh
-no change     /home/karley/.bashrc
-No action taken.
+/work/hmonge/compartida/ChromaScriptsKabre/cuda-jit/env.sh: line 9: spacktivate: command not found
+base
 Currently Loaded Modulefiles:
   1) null                    4) mpich/3.2.1-gcc
   2) cuda/11.6.2-gcc-9.3.0   5) cmake/3.26.0
   3) gcc/11.1.0
-srun  /work/karley/ChromaScriptsKabre/cuda-jit/install/chroma/bin/chroma -geom 1 1 1 1 -i ./sumop_kabre.ini.xml -o ./sumop_kabre.out.xml > ./sumop_kabre.stdout 2>&1
+srun  /work/hmonge/compartida/ChromaScriptsKabre/cuda-jit/install/chroma_ghk/bin/chroma -geom 1 1 1 1 -i ./hutchinson.ini.xml -o ./hutchinson.out.xml > ./hutchinson.stdout 2>&1

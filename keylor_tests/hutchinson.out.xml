@@ -86,7 +86,7 @@ una constante que nos dan un propagador resultante -->
       <qdp>0.1</qdp>
       <basePrecision>64</basePrecision>
     </code_version>
-    <run_date>16 Jan 24 07:48:46 CST</run_date>
+    <run_date>10 Mar 24 18:40:42 CST</run_date>
     <Setgeom>
       <latt_size>16 16 16 48</latt_size>
       <logical_size>1 1 1 1</logical_size>
@@ -159,7 +159,7 @@ una constante que nos dan un propagador resultante -->
             <qdp>0.1</qdp>
             <basePrecision>64</basePrecision>
           </code_version>
-          <run_date>16 Jan 24 07:48:52 CST</run_date>
+          <run_date>10 Mar 24 18:40:58 CST</run_date>
           <Setgeom>
             <latt_size>16 16 16 48</latt_size>
             <logical_size>1 1 1 1</logical_size>

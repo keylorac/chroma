@@ -1,20 +1,20 @@
 Setting CUDA device
 Initializing QMP part
 Initialize done
-Global Rank: 0 of 1 Host: nukwa-07.cnca  Local Rank: 0 of 1 Setting CUDA Device to 0 
+Global Rank: 0 of 1 Host: nukwa-06.cnca  Local Rank: 0 of 1 Setting CUDA Device to 0 
 GPU properties
   Compute capability (major,minor)    : 7,0
   Shared memory                       : 48 KB
   Max grid  (x,y,z)                   : (1073741824,32768,32768)
   Max block (x,y,z)                   : (1024,1024,64)
-  GPU memory (free,total)             : 32202/32510 MB
+  GPU memory (free,total)             : 32203/32510 MB
 Calling initCommsGridQuda
 calling initCommsGridQuda with ndim = 4 and geom=( 1, 1, 1, 1 )
 Initializing QUDA device (using CUDA device no. 0)
 QUDA 1.1.0 (git 1.1.0-32bb266-sm_70)
-CUDA Driver version = 11080
+CUDA Driver version = 11070
 CUDA Runtime version = 11060
-Graphic driver version = 520.61.05
+Graphic driver version = 515.65.01
 Found device 0: Tesla V100-PCIE-32GB
 Using device 0: Tesla V100-PCIE-32GB
 WARNING: Data reordering done on GPU (set with QUDA_REORDER_LOCATION=GPU/CPU)
@@ -92,7 +92,7 @@ Lattice initialized:
   total volume = 196608
   subgrid volume = 196608
 Memory pool config:
-  memory pool size (per fraction)     : 29626 MB
+  memory pool size (per fraction)     : 29627 MB
 Base precision                        : 64
 Accurate timing                       : 0
 Code generation:
@@ -107,24 +107,24 @@ Finished lattice layout
 CHROMA: Attempt to read gauge field
 CHROMA: Gauge initialization: cfg_type = WEAK_FIELD
 Starting up a weak field config
-CHROMA: Gauge field successfully read: time= 0.136549 secs
-CHROMA: initial plaquette measurement time=0.17545 secs
+CHROMA: Gauge field successfully read: time= 0.912079 secs
+CHROMA: initial plaquette measurement time=0.601755 secs
 CHROMA: There are 3 measurements 
-CHROMA: parsing inline measurements time=0.00093 secs
+CHROMA: parsing inline measurements time=0.002112 secs
 CHROMA: Doing 3 measurements
 QIO_READ_NAMED_OBJECT: object reader
 Attempt to read object name = prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx0ny5nz5nt0
 Attempting Parallel IO read
 Single Precision Read
 QIO_read_finished
-Object successfully read: time= 2.982707 secs
+Object successfully read: time= 8.521592 secs
 QIO_READ_NAMED_OBJECT: ran successfully
 QIO_READ_NAMED_OBJECT: object reader
 Attempt to read object name = prop_mq0.0278_wflow1.0_M51.3_L512_a1.5_cfg_2980_mom_nx5ny5nz0nt0
 Attempting Parallel IO read
 Single Precision Read
 QIO_read_finished
-Object successfully read: time= 2.874861 secs
+Object successfully read: time= 7.24997 secs
 QIO_READ_NAMED_OBJECT: ran successfully
 Attempt to initialize the gauge field
 cfs=XX<?xml version="1.0"?>
@@ -143,25 +143,25 @@ Forward propagator successfully parsed
 forward propagator check = 1255.89141683362
 Forward propagator successfully parsed
 SUM_PROPS: ran successfully
-CHROMA: measurements: time= 6.202952 secs
-CHROMA: total time = 8.24313 secs
+CHROMA: measurements: time= 17.168771 secs
+CHROMA: total time = 22.458954 secs
 CHROMA: ran successfully
 Saving 0 sets of cached parameters to /work/hmonge/compartida/ChromaScriptsKabre/cuda-jit/install/chroma_ghk/bin/profile_64_0.tsv
 Saving 0 sets of cached profiles to /work/hmonge/compartida/ChromaScriptsKabre/cuda-jit/install/chroma_ghk/bin/profile_64_0_async.tsv
 
-               initQuda Total time =     5.566 secs
-                     init     =     5.566 secs ( 99.999%),	 with        2 calls at 2.783e+06 us per call
-        total accounted       =     5.566 secs ( 99.999%)
-        total missing         =     0.000 secs (  0.001%)
+               initQuda Total time =     4.465 secs
+                     init     =     4.465 secs ( 99.998%),	 with        2 calls at 2.232e+06 us per call
+        total accounted       =     4.465 secs ( 99.998%)
+        total missing         =     0.000 secs (  0.002%)
 
-                endQuda Total time =     0.418 secs
+                endQuda Total time =     0.722 secs
 
-       initQuda-endQuda Total time =    14.231 secs
+       initQuda-endQuda Total time =    27.653 secs
 
-                   QUDA Total time =     5.983 secs
-                     init     =     5.566 secs ( 93.021%),	 with        2 calls at 2.783e+06 us per call
-        total accounted       =     5.566 secs ( 93.021%)
-        total missing         =     0.418 secs (  6.979%)
+                   QUDA Total time =     5.187 secs
+                     init     =     4.465 secs ( 86.075%),	 with        2 calls at 2.232e+06 us per call
+        total accounted       =     4.465 secs ( 86.075%)
+        total missing         =     0.722 secs ( 13.925%)
 
 Device memory used = 0.0 MiB
 Pinned device memory used = 0.0 MiB
@@ -183,8 +183,8 @@ Pool allocator
   peak memory usage:                       2181572480
 Code generator 
   functions jit-compiled:                  40
-  total time for IR builder:               0.009489 s
-  total time for libm IR linking:          0.091388 s
-  total time for IR passes:                0.016303 s
-  total time for code generation:          0.301093 s
-  total time for dynamic loading:          0.068581 s
+  total time for IR builder:               0.018392 s
+  total time for libm IR linking:          0.287454 s
+  total time for IR passes:                0.032286 s
+  total time for code generation:          0.591788 s
+  total time for dynamic loading:          3.74564 s

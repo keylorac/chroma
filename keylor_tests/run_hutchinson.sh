@@ -2,7 +2,7 @@
 #SBATCH --job-name=keylor_chroma_test
 #SBATCH --partition=nukwa
 #SBATCH --output=npr_test_load_prop.txt
-#SBATCH --nodelist=nukwa-06.cnca
+#SBATCH --nodelist=nukwa-05.cnca
 #SBATCH --ntasks=1
 #SBATCH --time=04:00:00
 

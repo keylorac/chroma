@@ -40,6 +40,21 @@
 
   }
 
+
+
+  void UnprecCloverLinOp::create(Handle< FermState<T,P,Q> > fs,
+				 const CloverFermActParams& param_)
+  {
+    //   QDPIO::cout << __PRETTY_FUNCTION__ << ": enter" << std::endl;
+    //
+   param = param_;
+    //
+   A.create(fs, param);
+   D.create(fs, param.anisoParam);
+    
+   
+
+
 namespace Chroma 
 { 
   namespace InlineHutchinsonTraceEstimatorEnv 
@@ -398,7 +413,7 @@ namespace Chroma
     LatticeFermion entrada;
     LatticeFermion salida;
 
-    multi1d <LatticeComplex> temp;
+    multi1d <Complex> temp; //multi1d <LatticeComplex> temp;
 
 
     int nvec=10;
@@ -407,23 +422,31 @@ namespace Chroma
        for(int i=0; i<nvec; i++){ // i in range(0,100)
           z2_src_t(entrada);   //crea el z2 noise vector
           salida=entrada;      //copia
+	  
 
-          for(int s=0; s<4;s++){
-            for(int c=0; c<3;c++){
-              QDPIO::cout << "temp_"<<i<<"(1000,"<<s<<","<<c<<") = " << entrada.elem(1000).elem(s).elem(c).real()<<"+";
-              QDPIO::cout << entrada.elem(1000).elem(s).elem(c).imag()<<"i\n";
-            }
-          }
+   
+
+       //for(int s=0; s<4;s++){
+            //for(int c=0; c<3;c++){
+              //QDPIO::cout << "temp_"<<i<<"(1000,"<<s<<","<<c<<") = " << entrada.elem(1000).elem(s).elem(c).real()<<"+";
+              //QDPIO::cout << entrada.elem(1000).elem(s).elem(c).imag()<<"i\n";
+            //}
+          //}
           temp[i] = innerProduct(entrada,salida); //producto punto
-          QDPIO::cout << "temp["<<i<<"]"<<temp[i].elem(1000).elem().elem().real()<<"i\n";
+          //QDPIO::cout << "temp["<<i<<"]"<<temp[i].elem(1000).elem().elem().real()<<"i\n";
        }
      
       Complex acumulado=0;
+      Complex variance=0;
 
       for(int i=0; i<nvec; i++){ 
-        acumulado+=sum(temp[i]);
+        acumulado+=acumulado+temp[i];//elem().elem().elem().real();
       }
       acumulado/=nvec;
+
+      for(int i=0; i<nvec; i++){
+	variance+=variance+((temp[i]-acumulado)*(temp[i]-acumulado));//nvec	
+      }
 
       int entradasDiagonal = QDP::Layout::vol()*12;
       Complex esperado=acumulado/entradasDiagonal; 
@@ -431,6 +454,8 @@ namespace Chroma
 
       QDPIO::cout << "Traza = " << entradasDiagonal <<"\n";
       QDPIO::cout << "El valor esperado es " << esperado.elem().elem().elem().real()<<"\n";
+      QDPIO::cout << "La varianza es " << variance.elem().elem().elem().real()<<"\n";
+
 
     //Seed ran_seed;
     //QDP::RNG::savern(ran_seed);

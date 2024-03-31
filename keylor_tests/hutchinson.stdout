@@ -1,20 +1,20 @@
 Setting CUDA device
 Initializing QMP part
 Initialize done
-Global Rank: 0 of 1 Host: nukwa-07.cnca  Local Rank: 0 of 1 Setting CUDA Device to 0 
+Global Rank: 0 of 1 Host: nukwa-05.cnca  Local Rank: 0 of 1 Setting CUDA Device to 0 
 GPU properties
   Compute capability (major,minor)    : 7,0
   Shared memory                       : 48 KB
   Max grid  (x,y,z)                   : (1073741824,32768,32768)
   Max block (x,y,z)                   : (1024,1024,64)
-  GPU memory (free,total)             : 32202/32510 MB
+  GPU memory (free,total)             : 32203/32510 MB
 Calling initCommsGridQuda
 calling initCommsGridQuda with ndim = 4 and geom=( 1, 1, 1, 1 )
 Initializing QUDA device (using CUDA device no. 0)
 QUDA 1.1.0 (git 1.1.0-32bb266-sm_70)
-CUDA Driver version = 11080
+CUDA Driver version = 11070
 CUDA Runtime version = 11060
-Graphic driver version = 520.61.05
+Graphic driver version = 515.65.01
 Found device 0: Tesla V100-PCIE-32GB
 Using device 0: Tesla V100-PCIE-32GB
 WARNING: Data reordering done on GPU (set with QUDA_REORDER_LOCATION=GPU/CPU)
@@ -95,7 +95,7 @@ Lattice initialized:
   total volume = 196608
   subgrid volume = 196608
 Memory pool config:
-  memory pool size (per fraction)     : 29626 MB
+  memory pool size (per fraction)     : 29627 MB
 Base precision                        : 64
 Accurate timing                       : 0
 Code generation:
@@ -110,24 +110,24 @@ Finished lattice layout
 CHROMA: Attempt to read gauge field
 CHROMA: Gauge initialization: cfg_type = WEAK_FIELD
 Starting up a weak field config
-CHROMA: Gauge field successfully read: time= 0.14439 secs
-CHROMA: initial plaquette measurement time=0.174844 secs
+CHROMA: Gauge field successfully read: time= 0.598878 secs
+CHROMA: initial plaquette measurement time=0.52844 secs
 CHROMA: There are 3 measurements 
-CHROMA: parsing inline measurements time=0.000935 secs
+CHROMA: parsing inline measurements time=0.002022 secs
 CHROMA: Doing 3 measurements
 QIO_READ_NAMED_OBJECT: object reader
 Attempt to read object name = prop_src1_x0y0z0t1
 Attempting Parallel IO read
 Single Precision Read
 QIO_read_finished
-Object successfully read: time= 3.063472 secs
+Object successfully read: time= 7.595763 secs
 QIO_READ_NAMED_OBJECT: ran successfully
 QIO_READ_NAMED_OBJECT: object reader
 Attempt to read object name = prop_src2_x1y1z1t2
 Attempting Parallel IO read
 Single Precision Read
 QIO_read_finished
-Object successfully read: time= 2.695231 secs
+Object successfully read: time= 7.200343 secs
 QIO_READ_NAMED_OBJECT: ran successfully
 Attempt to initialize the gauge field
 cfs=XX<?xml version="1.0"?>
@@ -145,158 +145,29 @@ forward propagator check = 3374.53677601315
 Forward propagator successfully parsed
 forward propagator check = 3338.76917480258
 Forward propagator successfully parsed
-temp_0(1000,0,0) = -1+0i
-temp_0(1000,0,1) = -1+0i
-temp_0(1000,0,2) = -1+0i
-temp_0(1000,1,0) = -1+0i
-temp_0(1000,1,1) = 1+0i
-temp_0(1000,1,2) = -1+0i
-temp_0(1000,2,0) = -1+0i
-temp_0(1000,2,1) = -1+0i
-temp_0(1000,2,2) = 1+0i
-temp_0(1000,3,0) = -1+0i
-temp_0(1000,3,1) = -1+0i
-temp_0(1000,3,2) = 1+0i
-temp[0]2359296i
-temp_1(1000,0,0) = 1+0i
-temp_1(1000,0,1) = -1+0i
-temp_1(1000,0,2) = -1+0i
-temp_1(1000,1,0) = -1+0i
-temp_1(1000,1,1) = 1+0i
-temp_1(1000,1,2) = 1+0i
-temp_1(1000,2,0) = 1+0i
-temp_1(1000,2,1) = -1+0i
-temp_1(1000,2,2) = 1+0i
-temp_1(1000,3,0) = -1+0i
-temp_1(1000,3,1) = 1+0i
-temp_1(1000,3,2) = -1+0i
-temp[1]2359296i
-temp_2(1000,0,0) = -1+0i
-temp_2(1000,0,1) = -1+0i
-temp_2(1000,0,2) = 1+0i
-temp_2(1000,1,0) = -1+0i
-temp_2(1000,1,1) = 1+0i
-temp_2(1000,1,2) = 1+0i
-temp_2(1000,2,0) = 1+0i
-temp_2(1000,2,1) = -1+0i
-temp_2(1000,2,2) = 1+0i
-temp_2(1000,3,0) = 1+0i
-temp_2(1000,3,1) = 1+0i
-temp_2(1000,3,2) = -1+0i
-temp[2]2359296i
-temp_3(1000,0,0) = -1+0i
-temp_3(1000,0,1) = 1+0i
-temp_3(1000,0,2) = 1+0i
-temp_3(1000,1,0) = -1+0i
-temp_3(1000,1,1) = 1+0i
-temp_3(1000,1,2) = 1+0i
-temp_3(1000,2,0) = -1+0i
-temp_3(1000,2,1) = -1+0i
-temp_3(1000,2,2) = -1+0i
-temp_3(1000,3,0) = -1+0i
-temp_3(1000,3,1) = 1+0i
-temp_3(1000,3,2) = -1+0i
-temp[3]2359296i
-temp_4(1000,0,0) = -1+0i
-temp_4(1000,0,1) = -1+0i
-temp_4(1000,0,2) = -1+0i
-temp_4(1000,1,0) = -1+0i
-temp_4(1000,1,1) = -1+0i
-temp_4(1000,1,2) = 1+0i
-temp_4(1000,2,0) = 1+0i
-temp_4(1000,2,1) = -1+0i
-temp_4(1000,2,2) = -1+0i
-temp_4(1000,3,0) = -1+0i
-temp_4(1000,3,1) = 1+0i
-temp_4(1000,3,2) = -1+0i
-temp[4]2359296i
-temp_5(1000,0,0) = 1+0i
-temp_5(1000,0,1) = 1+0i
-temp_5(1000,0,2) = 1+0i
-temp_5(1000,1,0) = 1+0i
-temp_5(1000,1,1) = -1+0i
-temp_5(1000,1,2) = 1+0i
-temp_5(1000,2,0) = -1+0i
-temp_5(1000,2,1) = -1+0i
-temp_5(1000,2,2) = -1+0i
-temp_5(1000,3,0) = 1+0i
-temp_5(1000,3,1) = 1+0i
-temp_5(1000,3,2) = 1+0i
-temp[5]2359296i
-temp_6(1000,0,0) = -1+0i
-temp_6(1000,0,1) = 1+0i
-temp_6(1000,0,2) = -1+0i
-temp_6(1000,1,0) = 1+0i
-temp_6(1000,1,1) = -1+0i
-temp_6(1000,1,2) = 1+0i
-temp_6(1000,2,0) = 1+0i
-temp_6(1000,2,1) = 1+0i
-temp_6(1000,2,2) = -1+0i
-temp_6(1000,3,0) = -1+0i
-temp_6(1000,3,1) = -1+0i
-temp_6(1000,3,2) = -1+0i
-temp[6]2359296i
-temp_7(1000,0,0) = 1+0i
-temp_7(1000,0,1) = 1+0i
-temp_7(1000,0,2) = 1+0i
-temp_7(1000,1,0) = 1+0i
-temp_7(1000,1,1) = -1+0i
-temp_7(1000,1,2) = -1+0i
-temp_7(1000,2,0) = 1+0i
-temp_7(1000,2,1) = -1+0i
-temp_7(1000,2,2) = 1+0i
-temp_7(1000,3,0) = 1+0i
-temp_7(1000,3,1) = -1+0i
-temp_7(1000,3,2) = 1+0i
-temp[7]2359296i
-temp_8(1000,0,0) = -1+0i
-temp_8(1000,0,1) = 1+0i
-temp_8(1000,0,2) = 1+0i
-temp_8(1000,1,0) = -1+0i
-temp_8(1000,1,1) = -1+0i
-temp_8(1000,1,2) = -1+0i
-temp_8(1000,2,0) = 1+0i
-temp_8(1000,2,1) = 1+0i
-temp_8(1000,2,2) = 1+0i
-temp_8(1000,3,0) = -1+0i
-temp_8(1000,3,1) = -1+0i
-temp_8(1000,3,2) = 1+0i
-temp[8]2359296i
-temp_9(1000,0,0) = -1+0i
-temp_9(1000,0,1) = -1+0i
-temp_9(1000,0,2) = -1+0i
-temp_9(1000,1,0) = 1+0i
-temp_9(1000,1,1) = -1+0i
-temp_9(1000,1,2) = -1+0i
-temp_9(1000,2,0) = -1+0i
-temp_9(1000,2,1) = 1+0i
-temp_9(1000,2,2) = -1+0i
-temp_9(1000,3,0) = -1+0i
-temp_9(1000,3,1) = 1+0i
-temp_9(1000,3,2) = 1+0i
-temp[9]2359296i
 Traza = 2359296
-El valor esperado es 196608
+El valor esperado es 1
+La varianza es 0
 HUTCHINSON_ESTIMATOR_TRACE: ran successfully
-CHROMA: measurements: time= 7.608213 secs
-CHROMA: total time = 9.79029 secs
+CHROMA: measurements: time= 15.598737 secs
+CHROMA: total time = 19.459037 secs
 CHROMA: ran successfully
 Saving 0 sets of cached parameters to /work/hmonge/compartida/ChromaScriptsKabre/cuda-jit/install/chroma_ghk/bin/profile_64_0.tsv
 Saving 0 sets of cached profiles to /work/hmonge/compartida/ChromaScriptsKabre/cuda-jit/install/chroma_ghk/bin/profile_64_0_async.tsv
 
-               initQuda Total time =     6.319 secs
-                     init     =     6.319 secs ( 99.999%),	 with        2 calls at 3.160e+06 us per call
-        total accounted       =     6.319 secs ( 99.999%)
+               initQuda Total time =    10.995 secs
+                     init     =    10.995 secs ( 99.999%),	 with        2 calls at 5.497e+06 us per call
+        total accounted       =    10.995 secs ( 99.999%)
         total missing         =     0.000 secs (  0.001%)
 
-                endQuda Total time =     0.749 secs
+                endQuda Total time =     0.442 secs
 
-       initQuda-endQuda Total time =    16.864 secs
+       initQuda-endQuda Total time =    30.904 secs
 
-                   QUDA Total time =     7.068 secs
-                     init     =     6.319 secs ( 89.409%),	 with        2 calls at 3.160e+06 us per call
-        total accounted       =     6.319 secs ( 89.409%)
-        total missing         =     0.749 secs ( 10.591%)
+                   QUDA Total time =    11.437 secs
+                     init     =    10.995 secs ( 96.138%),	 with        2 calls at 5.497e+06 us per call
+        total accounted       =    10.995 secs ( 96.138%)
+        total missing         =     0.442 secs (  3.862%)
 
 Device memory used = 0.0 MiB
 Pinned device memory used = 0.0 MiB
@@ -311,15 +182,15 @@ Total host memory used >= 0.0 MiB
         ------------------------
 
 Memory cache 
-  lattice objects copied to host memory:   26
-  lattice objects copied to device memory: 22
+  lattice objects copied to host memory:   6
+  lattice objects copied to device memory: 2
 
 Pool allocator 
-  peak memory usage:                       2290115200
+  peak memory usage:                       2279092864
 Code generator 
-  functions jit-compiled:                  50
-  total time for IR builder:               0.010837 s
-  total time for libm IR linking:          0.097062 s
-  total time for IR passes:                0.017178 s
-  total time for code generation:          0.347087 s
-  total time for dynamic loading:          0.100136 s
+  functions jit-compiled:                  48
+  total time for IR builder:               0.01815 s
+  total time for libm IR linking:          0.219675 s
+  total time for IR passes:                0.029259 s
+  total time for code generation:          0.55979 s
+  total time for dynamic loading:          1.211881 s
