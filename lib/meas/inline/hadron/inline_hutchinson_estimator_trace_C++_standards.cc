@@ -101,6 +101,7 @@ namespace Chroma
 
         read(paramtop, "cons_1", input.cons_1);
         read(paramtop, "cons_2", input.cons_2);
+        input.fermact = readXMLGroup(paramtop, "FermionAction", "FermAct");
     }
 
     //! Param write
