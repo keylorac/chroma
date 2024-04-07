@@ -38,6 +38,7 @@ namespace Chroma
       
       float cons_1;          /*!< constante 2 */
       float cons_2;          /*!< constante 1 */ 
+      GroupXML_t      fermact;          /*!< fermion action */
       GroupXML_t   cfs;                /*!< Fermion state */                     
     } param;
 
