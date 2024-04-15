@@ -40,21 +40,6 @@
 
   }
 
-
-
-  void UnprecCloverLinOp::create(Handle< FermState<T,P,Q> > fs,
-				 const CloverFermActParams& param_)
-  {
-    //   QDPIO::cout << __PRETTY_FUNCTION__ << ": enter" << std::endl;
-    //
-   param = param_;
-    //
-   A.create(fs, param);
-   D.create(fs, param.anisoParam);
-    
-   
-
-
 namespace Chroma 
 { 
   namespace InlineHutchinsonTraceEstimatorEnv 
